@@ -9,10 +9,7 @@ data class StickyNoteState(
 
     @ColorInt
     val backgroundColor: Int = -1, // change to white default color ?
-    val isRevealed: Boolean = false,
     val noteText: UiString,
 
-    val onRevealAction: (() -> Unit)? = null,
-    val onPrimaryAction: (() -> Unit)? = null,
-    val onSecondaryAction: (() -> Unit)? = null
+    val onPrimaryAction: (() -> Unit)? = null
 ) : Identifiable
