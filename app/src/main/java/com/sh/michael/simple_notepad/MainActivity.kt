@@ -1,14 +1,8 @@
 package com.sh.michael.simple_notepad
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import com.sh.michael.simple_notepad.common.DrawerHandle
 import com.sh.michael.simple_notepad.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,5 +14,11 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        DrawerHandle.attach(binding.drawerNavigationView, R.layout.menu_handle, HANDLE_OFFSET)
+    }
+
+    companion object {
+        const val HANDLE_OFFSET = 0.7f
     }
 }
