@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "simple-notepad"
-include ':app'
+include(":app")
