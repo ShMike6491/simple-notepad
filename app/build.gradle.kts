@@ -53,6 +53,8 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.compiler)
     implementation(libs.kotlin.coroutines)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
 
     testImplementation(libs.test.junit)
 
