@@ -50,6 +50,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.navigation.ui)
     implementation(libs.navigation.fragment)
+    implementation(libs.room.runtime)
+    implementation(libs.room.compiler)
 
     testImplementation(libs.test.junit)
 
