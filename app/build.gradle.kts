@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.room.runtime)
     implementation(libs.room.compiler)
+    implementation(libs.kotlin.coroutines)
 
     testImplementation(libs.test.junit)
 
