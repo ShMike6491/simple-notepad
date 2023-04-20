@@ -1,16 +1,20 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
 }
 
 android {
+    val androidMinSdk: String by project
+    val androidCompileSdk: String by project
+    val androidTargetSdk: String by project
+
     namespace = "com.sh.michael.simple_notepad"
-    compileSdkVersion(33)
+    compileSdk = androidCompileSdk.toInt()
 
     defaultConfig {
         applicationId = "com.sh.michael.simple_notepad"
-        minSdkVersion(24)
-        targetSdkVersion(33)
+        minSdk = androidMinSdk.toInt()
+        targetSdk = androidTargetSdk.toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -39,13 +43,16 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation(libs.android.core)
+    implementation(libs.android.appcompat)
+    implementation(libs.android.constraint)
+    implementation(libs.material)
+    implementation(libs.navigation.ui)
+    implementation(libs.navigation.fragment)
+
+    testImplementation(libs.test.junit)
+
+    androidTestImplementation(libs.test.android)
+    androidTestImplementation(libs.test.espresso)
 }
