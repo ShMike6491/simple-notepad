@@ -21,7 +21,7 @@ dependencyResolutionManagement {
             val materialRef = version("material", "1.8.0")
             val androidCompatRef = version("appcompat", "1.6.1")
             val androidConstraintRef = version("constraint", "2.1.4")
-            val androidCoreRef = version("constraint", "1.7.0")
+            val androidCoreRef = version("core", "1.7.0")
             val coroutinesRef = version("coroutines", "1.6.2")
             val roomRef = version("room", "2.5.1")
             val koinRef = version("koin", "3.4.0")
