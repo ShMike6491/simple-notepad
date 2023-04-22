@@ -4,10 +4,21 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.sh.michael.simple_notepad.feature_notes.data.BackgroundConverter
+import com.sh.michael.simple_notepad.feature_notes.data.StickyNotesDao
+import com.sh.michael.simple_notepad.feature_notes.data.model.RoomStickyNote
 
-@Database(entities = [], version = 1)
+@Database(
+    entities = [
+        RoomStickyNote::class
+    ],
+    version = 2
+)
+@TypeConverters(BackgroundConverter::class)
 abstract class AppDatabase : RoomDatabase() {
-//    abstract fun dao(): Dao
+
+    abstract fun stickyNotesDao(): StickyNotesDao
 
     companion object {
 
@@ -22,6 +33,9 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     DATABASE_TAG
                 )
+                    // todo: convert to migration strategies when app is in production
+                    //  https://developer.android.com/training/data-storage/room/migrating-db-versions.html
+                    .fallbackToDestructiveMigration()
                     .build()
 
                 INSTANCE = instance
