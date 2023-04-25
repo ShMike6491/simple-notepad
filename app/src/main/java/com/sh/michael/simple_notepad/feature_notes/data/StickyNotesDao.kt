@@ -45,7 +45,7 @@ interface StickyNotesDao {
     suspend fun deleteAll()
 
     @Query("DELETE FROM $NOTES_TABLE_NAME WHERE id = :id")
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: String)
 
     @Query("SELECT * FROM $NOTES_TABLE_NAME")
     fun getAll(): Flow<List<RoomStickyNote>>
@@ -58,5 +58,5 @@ interface StickyNotesDao {
             "WHERE id LIKE (:id) " +
             "LIMIT 1"
     )
-    suspend fun getNoteById(id: Int): RoomStickyNote?
+    suspend fun getNoteById(id: String): RoomStickyNote?
 }
