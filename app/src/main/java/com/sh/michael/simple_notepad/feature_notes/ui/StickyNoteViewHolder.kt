@@ -4,6 +4,8 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.sh.michael.simple_notepad.databinding.ItemStickyNoteBinding
 import com.sh.michael.simple_notepad.feature_notes.ui.model.StickyNoteState
+import com.sh.michael.simple_notepad.feature_notes.ui.model.background
+import com.sh.michael.simple_notepad.feature_notes.ui.model.title
 
 class StickyNoteViewHolder(
     private val view: View,
@@ -12,9 +14,8 @@ class StickyNoteViewHolder(
     private val itemBinding by lazy { ItemStickyNoteBinding.bind(view) }
 
     fun bindItem(item: StickyNoteState) = itemBinding.apply {
-        // todo refactor to normal background setter
-        val colorRes = item.backgroundColor.toInt()
-        cardView.setCardBackgroundColor(view.context.getColor(colorRes))
-        stickyNoteTextView.text = item.noteText.asString(view.context)
+        val color = view.context.getColor(item.background)
+        cardView.setCardBackgroundColor(color)
+        stickyNoteTextView.text = item.title.asString(view.context)
     }
 }
