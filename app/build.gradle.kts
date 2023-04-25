@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -54,11 +55,13 @@ dependencies {
     implementation(libs.android.core)
     implementation(libs.android.appcompat)
     implementation(libs.android.constraint)
+    implementation(libs.android.lifecycle)
     implementation(libs.material)
     implementation(libs.navigation.ui)
     implementation(libs.navigation.fragment)
     implementation(libs.room.runtime)
-    implementation(libs.room.compiler)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
     implementation(libs.kotlin.coroutines)
     implementation(libs.koin.core)
     implementation(libs.koin.android)
