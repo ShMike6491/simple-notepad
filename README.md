@@ -17,6 +17,8 @@ ddd real life example app: https://gitlab.com/flexsentlabs/tip_prorotype/-/tree/
 
 stock market example app: https://github.com/philipplackner/StockMarketApp/tree/final
 
+spotify clone example app: https://github.com/philipplackner/SpotifyCloneYT/tree/Part19-SongFragment2
+
 ## Project Stracture
 
 ### Dependencies
