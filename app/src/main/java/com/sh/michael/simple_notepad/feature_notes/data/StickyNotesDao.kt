@@ -50,8 +50,8 @@ interface StickyNotesDao {
     @Query("SELECT * FROM $NOTES_TABLE_NAME")
     fun getAll(): Flow<List<RoomStickyNote>>
 
-    @Query("SELECT * FROM $NOTES_TABLE_NAME ORDER BY priority ASC")
-    fun getAllByPriority(): Flow<List<RoomStickyNote>>
+    @Query("SELECT * FROM $NOTES_TABLE_NAME ORDER BY priority DESC")
+    fun getAllByPriorityDesc(): Flow<List<RoomStickyNote>>
 
     @Query(
         "SELECT * FROM $NOTES_TABLE_NAME " +
@@ -59,4 +59,7 @@ interface StickyNotesDao {
             "LIMIT 1"
     )
     suspend fun getNoteById(id: String): RoomStickyNote?
+
+    @Query("SELECT MAX(priority) FROM $NOTES_TABLE_NAME")
+    suspend fun getHighestPriority(): Int?
 }
