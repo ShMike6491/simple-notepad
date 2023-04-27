@@ -9,6 +9,4 @@ val appModule = module {
     single { AppDatabase.getDatabase(androidApplication()) }
 }
 
-val appModules = mutableListOf(appModule).apply {
-    addAll(notesModule)
-}
+val appModules = listOf(appModule, notesModule)
