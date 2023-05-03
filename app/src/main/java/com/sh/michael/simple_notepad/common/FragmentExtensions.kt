@@ -18,7 +18,7 @@ fun <T> Fragment.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) 
     }
 }
 
-fun Fragment.addKeyboardStateListener(binding: ViewBinding, callback: (isOpen: Boolean) -> Unit) {
+fun Fragment.addKeyboardStateListener(binding: ViewBinding, callback: (height: Int, isOpen: Boolean) -> Unit) {
     val rootView = binding.root
 
     rootView.viewTreeObserver.addOnGlobalLayoutListener {
@@ -30,6 +30,6 @@ fun Fragment.addKeyboardStateListener(binding: ViewBinding, callback: (isOpen: B
         // 0.15 ratio is perhaps enough to determine keypad height.
         val isStateOpen = keypadHeight > screenHeight * 0.15
 
-        callback.invoke(isStateOpen)
+        callback.invoke(keypadHeight, isStateOpen)
     }
 }

@@ -42,7 +42,7 @@ class AddNoteDialog : BottomSheetDialogFragment(R.layout.dialog_add_sticky_note)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        addKeyboardStateListener(binding) { isOpen ->
+        addKeyboardStateListener(binding) { _, isOpen ->
             val dialog = dialog as? BottomSheetDialog
             val dialogState = if (isOpen) STATE_EXPANDED else STATE_COLLAPSED
 
