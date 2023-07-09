@@ -17,11 +17,4 @@ data class StickyNoteState(
 val StickyNoteState.title: UiString get() = UiString.DynamicString(note.noteText)
 
 @get:ColorRes
-val StickyNoteState.background: Int get() = when (note.backgroundColor) {
-    BackgroundColor.BLUE -> R.color.baby_blue
-    BackgroundColor.PINK -> R.color.red_pink
-    BackgroundColor.VIOLET -> R.color.violet
-    BackgroundColor.GREEN -> R.color.light_green
-    BackgroundColor.ORANGE -> R.color.red_orange
-    else -> R.color.white
-}
+val StickyNoteState.background: Int get() = note.backgroundColor.asColorRes
