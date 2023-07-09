@@ -53,8 +53,8 @@ android {
             }
         }
 
-        unitTests.all {
-            it.useJUnitPlatform()
+        unitTests {
+            isIncludeAndroidResources = true
         }
     }
 }
@@ -86,18 +86,16 @@ dependencies {
     testImplementation(libs.test.mockk.core)
     testImplementation(libs.test.coroutines)
 
-    androidTestImplementation(libs.test.junit)
-    androidTestImplementation(libs.test.android)
-    androidTestImplementation(libs.test.mockk.android)
-    androidTestImplementation(libs.test.runner)
-    androidTestImplementation(libs.test.core)
-    androidTestImplementation(libs.test.espresso.core)
-    androidTestImplementation(libs.test.espresso.contrib)
-    androidTestImplementation(libs.test.espresso.idling)
-    androidTestImplementation(libs.test.espresso.intents)
-    androidTestImplementation(libs.test.fragment)
-    androidTestImplementation(libs.test.coroutines)
-    androidTestImplementation(libs.test.koin)
-
-//    debugImplementation(libs.test.fragment)
+    debugImplementation(libs.test.junit)
+    debugImplementation(libs.test.android)
+    debugImplementation(libs.test.mockk.android)
+    debugImplementation(libs.test.runner)
+    debugImplementation(libs.test.core)
+    debugImplementation(libs.test.espresso.core)
+    debugImplementation(libs.test.espresso.contrib)
+    debugImplementation(libs.test.espresso.idling)
+    debugImplementation(libs.test.espresso.intents)
+    debugImplementation(libs.test.fragment)
+    debugImplementation(libs.test.coroutines)
+    debugImplementation(libs.test.koin)
 }
