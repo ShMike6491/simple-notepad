@@ -11,4 +11,4 @@ class TestRunner : AndroidJUnitRunner() {
     }
 }
 
-class TestApplication: Application()
+class TestApplication : Application()
