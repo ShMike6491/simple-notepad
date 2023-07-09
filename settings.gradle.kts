@@ -29,6 +29,9 @@ dependencyResolutionManagement {
             val junitRef = version("junit", "4.13.2")
             val espressoRef = version("espresso", "3.5.1")
             val androidTestRef = version("android-test", "1.1.5")
+            val mockkRef = version("mockk", "1.12.2")
+            val testCoreRef = version("test-core", "1.4.0")
+            val testFragmentRef = version("test-fragment", "1.5.5")
 
             alias("navigation-fragment").to("androidx.navigation", "navigation-fragment-ktx").versionRef(navigationRef)
             alias("navigation-ui").to("androidx.navigation", "navigation-ui-ktx").versionRef(navigationRef)
@@ -44,9 +47,19 @@ dependencyResolutionManagement {
             alias("room-compiler").to("androidx.room", "room-compiler").versionRef(roomRef)
             alias("room-ktx").to("androidx.room", "room-ktx").versionRef(roomRef)
             alias("test-junit").to("junit", "junit").versionRef(junitRef)
+            alias("test-core").to("androidx.test", "core").versionRef(testCoreRef)
+            alias("test-runner").to("androidx.test", "runner").versionRef(testCoreRef)
+            alias("test-rules").to("androidx.test", "rules").versionRef(testCoreRef)
+            alias("test-fragment").to("androidx.fragment", "fragment-testing").versionRef(testFragmentRef)
+            alias("test-coroutines").to("org.jetbrains.kotlinx", "kotlinx-coroutines-test").versionRef(coroutinesRef)
             alias("test-koin").to("io.insert-koin", "koin-test").versionRef(koinRef)
-            alias("test-espresso").to("androidx.test.espresso", "espresso-core").versionRef(espressoRef)
+            alias("test-espresso-core").to("androidx.test.espresso", "espresso-core").versionRef(espressoRef)
+            alias("test-espresso-contrib").to("androidx.test.espresso", "espresso-contrib").versionRef(espressoRef)
+            alias("test-espresso-idling").to("androidx.test.espresso", "espresso-idling-resource").versionRef(espressoRef)
+            alias("test-espresso-intents").to("androidx.test.espresso", "espresso-intents").versionRef(espressoRef)
             alias("test-android").to("androidx.test.ext", "junit").versionRef(androidTestRef)
+            alias("test-mockk-core").to("io.mockk", "mockk").versionRef(mockkRef)
+            alias("test-mockk-android").to("io.mockk", "mockk-android").versionRef(mockkRef)
         }
     }
 }

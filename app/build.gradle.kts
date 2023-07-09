@@ -19,7 +19,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.sh.michael.simple_notepad.TestRunner"
     }
 
     buildTypes {
@@ -40,6 +40,22 @@ android {
 
     buildFeatures {
         viewBinding = true
+    }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+
+    testOptions {
+        packagingOptions {
+            jniLibs {
+                useLegacyPackaging = true
+            }
+        }
+
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
     }
 }
 
@@ -67,7 +83,21 @@ dependencies {
     implementation(libs.koin.android)
 
     testImplementation(libs.test.junit)
+    testImplementation(libs.test.mockk.core)
+    testImplementation(libs.test.coroutines)
 
+    androidTestImplementation(libs.test.junit)
     androidTestImplementation(libs.test.android)
-    androidTestImplementation(libs.test.espresso)
+    androidTestImplementation(libs.test.mockk.android)
+    androidTestImplementation(libs.test.runner)
+    androidTestImplementation(libs.test.core)
+    androidTestImplementation(libs.test.espresso.core)
+    androidTestImplementation(libs.test.espresso.contrib)
+    androidTestImplementation(libs.test.espresso.idling)
+    androidTestImplementation(libs.test.espresso.intents)
+    androidTestImplementation(libs.test.fragment)
+    androidTestImplementation(libs.test.coroutines)
+    androidTestImplementation(libs.test.koin)
+
+//    debugImplementation(libs.test.fragment)
 }
