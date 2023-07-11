@@ -17,14 +17,14 @@ fun onRecyclerViewItem(
     targetViewId: Int? = null
 ): ViewInteraction = onView(object : TypeSafeMatcher<View>() {
 
-    private lateinit var resources: Resources
+    private var resources: Resources? = null
     private var recyclerView: RecyclerView? = null
     private var holder: RecyclerView.ViewHolder? = null
     private var targetView: View? = null
 
     override fun describeTo(description: Description) {
         fun Int.name(): String = try {
-            "R.id.${resources.getResourceEntryName(this)}"
+            "R.id.${resources?.getResourceEntryName(this)}"
         } catch (e: Resources.NotFoundException) {
             "unknown id $this"
         }
@@ -40,7 +40,7 @@ fun onRecyclerViewItem(
     override fun matchesSafely(view: View): Boolean {
         // matchesSafely will be called for each view in the hierarchy (until found),
         // it makes no sense to perform lookup over and over again
-        if (!::resources.isInitialized) {
+        if (recyclerView == null) {
             resources = view.resources
             recyclerView = view.rootView.findViewById(recyclerViewId) ?: return false
             holder = recyclerView?.findViewHolderForAdapterPosition(position) ?: return false
