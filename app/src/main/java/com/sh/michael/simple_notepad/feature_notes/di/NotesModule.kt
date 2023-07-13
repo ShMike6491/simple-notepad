@@ -1,0 +1,17 @@
+package com.sh.michael.simple_notepad.feature_notes.di
+
+import com.sh.michael.simple_notepad.common.interfaces.INavigationCallback
+import com.sh.michael.simple_notepad.feature_notes.data.repository.StickyNoteRepositoryImpl
+import com.sh.michael.simple_notepad.feature_notes.domain.IStickyNoteRepository
+import com.sh.michael.simple_notepad.feature_notes.ui.StickyNotesViewModel
+import com.sh.michael.simple_notepad.feature_notes.ui.dialog.AddNoteViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.parameter.parametersOf
+import org.koin.dsl.module
+
+val notesModule = module {
+    single { StickyNoteRepositoryImpl(database = get()) as IStickyNoteRepository }
+
+    viewModel { StickyNotesViewModel(repo = get()) }
+    viewModel { (callback: INavigationCallback?) -> AddNoteViewModel(repo = get(), callback) }
+}

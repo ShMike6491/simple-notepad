@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/ic_circle"
+    android:backgroundTint="@color/button_selector_color"
+    android:id="@+id/outerLayout"
+    android:layout_height="@dimen/default_gap_large"
+    android:layout_width="@dimen/default_gap_large"
+    android:padding="3dp">
+
+    <FrameLayout
+        android:background="@drawable/ic_circle"
+        android:id="@+id/innerLayout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+
+</FrameLayout>

@@ -1,9 +1,12 @@
 package com.sh.michael.simple_notepad.app.di
 
+import com.sh.michael.simple_notepad.app.data.AppDatabase
+import com.sh.michael.simple_notepad.feature_notes.di.notesModule
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
 val appModule = module {
-    // todo
+    single { AppDatabase.getDatabase(androidApplication()) }
 }
 
-val appModules = mutableListOf(appModule)
+val appModules = listOf(appModule, notesModule)

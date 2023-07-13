@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -18,7 +19,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.sh.michael.simple_notepad.TestRunner"
     }
 
     buildTypes {
@@ -40,6 +41,29 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+
+    testOptions {
+        packagingOptions {
+            jniLibs {
+                useLegacyPackaging = true
+            }
+        }
+
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
+}
+
+configurations {
+    create("cleanedAnnotations")
+    implementation {
+        exclude(group = "org.jetbrains", module = "annotations")
+    }
 }
 
 dependencies {
@@ -47,17 +71,31 @@ dependencies {
     implementation(libs.android.core)
     implementation(libs.android.appcompat)
     implementation(libs.android.constraint)
+    implementation(libs.android.lifecycle)
     implementation(libs.material)
     implementation(libs.navigation.ui)
     implementation(libs.navigation.fragment)
     implementation(libs.room.runtime)
-    implementation(libs.room.compiler)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
     implementation(libs.kotlin.coroutines)
     implementation(libs.koin.core)
     implementation(libs.koin.android)
 
     testImplementation(libs.test.junit)
+    testImplementation(libs.test.mockk.core)
+    testImplementation(libs.test.coroutines)
 
-    androidTestImplementation(libs.test.android)
-    androidTestImplementation(libs.test.espresso)
+    debugImplementation(libs.test.junit)
+    debugImplementation(libs.test.android)
+    debugImplementation(libs.test.mockk.android)
+    debugImplementation(libs.test.runner)
+    debugImplementation(libs.test.core)
+    debugImplementation(libs.test.espresso.core)
+    debugImplementation(libs.test.espresso.contrib)
+    debugImplementation(libs.test.espresso.idling)
+    debugImplementation(libs.test.espresso.intents)
+    debugImplementation(libs.test.fragment)
+    debugImplementation(libs.test.coroutines)
+    debugImplementation(libs.test.koin)
 }
