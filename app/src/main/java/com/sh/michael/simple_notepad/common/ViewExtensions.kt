@@ -19,6 +19,20 @@ inline fun <T : View> T.showAndApplyIf(condition: Boolean, block: T.() -> Unit):
     return this
 }
 
+/**
+ * Allows to apply block of code to view only once
+ */
+inline fun <T : View> T.applyOnce(block: T.() -> Unit): T {
+    val tagNotSet = (this.tag == null)
+
+    if (tagNotSet) {
+        this.apply(block)
+        this.tag = true
+    }
+
+    return this
+}
+
 fun EditText.disableScroll() {
     movementMethod = null
 }
