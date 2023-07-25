@@ -5,9 +5,11 @@ import com.sh.michael.simple_notepad.common.model.UiString
 
 data class PageState(
     override val id: String,
-    val valueText: UiString? = null,
+    val valueText: String? = null,
     val hintText: UiString? = null,
     val pageTag: UiString? = null,
 
-    // todo add text listener to track changes
-) : Identifiable
+    val onTextChangeAction: ((sequence: CharSequence?) -> Unit)? = null
+) : Identifiable {
+    val bodyText: UiString? get() = valueText?.let { UiString.DynamicString(it) }
+}
