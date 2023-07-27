@@ -17,4 +17,12 @@
         android:singleLine="false"
         tools:text="@tools:sample/lorem/random" />
 
+    <include
+        layout="@layout/error_layout"
+        android:id="@+id/errorContainer"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
 </FrameLayout>
