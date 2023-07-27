@@ -18,4 +18,8 @@
     <color name="baby_blue">#ff81deea</color>
     <color name="violet">#ffcf94da</color>
     <color name="light_green">#ffe7ed9b</color>
+
+    <color name="error_red">#bb2124</color>
+    <color name="green_success">#22bb33</color>
+    <color name="blue_netrual">#5bc0de</color>
 </resources>
