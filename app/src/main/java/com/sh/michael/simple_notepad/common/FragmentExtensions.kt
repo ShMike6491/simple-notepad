@@ -7,7 +7,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 fun <T> Fragment.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
@@ -16,6 +19,20 @@ fun <T> Fragment.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) 
             flow.collectLatest(collect)
         }
     }
+}
+
+fun <T> Fragment.collectLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
+    lifecycleScope.launch {
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
+            flow.collect(collect)
+        }
+    }
+}
+
+fun <T> Fragment.catchLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
+    flow.catch {}
+        .onEach(collect)
+        .launchIn(lifecycleScope)
 }
 
 fun Fragment.addKeyboardStateListener(binding: ViewBinding, callback: (height: Int, isOpen: Boolean) -> Unit) {
