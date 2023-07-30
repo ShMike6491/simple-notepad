@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class AddNoteViewModel(
     private val repo: IStickyNoteRepository,
-    private val navigationCallback: INavigationCallback?
+    private val navigationCallback: INavigationCallback? // todo: migrate to UiEvent handling
 ) : ViewModel() {
 
     private val initialState = AddNoteState(
