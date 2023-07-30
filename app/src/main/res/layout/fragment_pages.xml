@@ -17,6 +17,15 @@
         android:singleLine="false"
         tools:text="@tools:sample/lorem/random" />
 
+    <ProgressBar
+        android:id="@+id/loadingBar"
+        android:indeterminateTint="@color/banana_yellow"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
     <include
         layout="@layout/error_layout"
         android:id="@+id/errorContainer"
