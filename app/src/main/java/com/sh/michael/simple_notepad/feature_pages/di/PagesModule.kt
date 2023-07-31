@@ -9,5 +9,7 @@ import org.koin.dsl.module
 val pagesModule = module {
     single { PagesRepositoryImpl(database = get()) as IPagesRepository }
 
-    viewModel { PagesViewModel() }
+    viewModel { (id: String?) ->
+        PagesViewModel(fileId = id, repository = get())
+    }
 }
