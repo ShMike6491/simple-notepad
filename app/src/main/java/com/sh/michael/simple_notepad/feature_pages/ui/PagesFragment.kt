@@ -18,10 +18,12 @@ import com.sh.michael.simple_notepad.common.viewBinding
 import com.sh.michael.simple_notepad.databinding.FragmentPagesBinding
 import com.sh.michael.simple_notepad.feature_pages.ui.model.PageState
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PagesFragment : Fragment(R.layout.fragment_pages) {
 
-    private val viewModel: PagesViewModel by viewModel()
+    private val fileIdArg: String? by lazy { arguments?.getString(FILE_ID_ARG) }
+    private val viewModel: PagesViewModel by viewModel { parametersOf(fileIdArg) }
     private val binding by viewBinding(FragmentPagesBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,6 +66,21 @@ class PagesFragment : Fragment(R.layout.fragment_pages) {
 
         errorMessageTextView.showAndApplyIf(errorState.messageText.hasValue(context)) {
             text = errorState.messageText?.asString(context)
+        }
+    }
+
+    companion object {
+
+        private const val FILE_ID_ARG = "file_id"
+
+        fun newInstance(fileId: String? = null): PagesFragment {
+            val bundle = Bundle().also {
+                it.putString(FILE_ID_ARG, fileId)
+            }
+
+            return PagesFragment().also {
+                it.arguments = bundle
+            }
         }
     }
 }
