@@ -66,4 +66,18 @@ interface PagesDao {
             "LIMIT 1"
     )
     suspend fun getPageByFileId(id: String): RoomPage?
+
+    @Query(
+        "SELECT * FROM $PAGES_TABLE_NAME " +
+            "WHERE fileId LIKE (:id) " +
+            "LIMIT 1"
+    )
+    fun observePageOfFile(id: String): Flow<RoomPage?>
+
+    @Query(
+        "SELECT * FROM $PAGES_TABLE_NAME " +
+            "WHERE id LIKE (:id) " +
+            "LIMIT 1"
+    )
+    fun observePage(id: String): Flow<RoomPage?>
 }
