@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IPagesRepository {
 
-    fun observePageForId(fileId: String): Flow<IPage>
+    fun observePageForId(fileId: String): Flow<IPage?>
 
     suspend fun removePageById(id: String)
 
@@ -14,4 +14,8 @@ interface IPagesRepository {
     suspend fun updatePage(id: String, value: String?)
 
     suspend fun createPage(fileId: String, value: String?)
+
+    suspend fun getPageById(pageId: String): IPage?
+
+    suspend fun getPageByFile(fileId: String): IPage?
 }
