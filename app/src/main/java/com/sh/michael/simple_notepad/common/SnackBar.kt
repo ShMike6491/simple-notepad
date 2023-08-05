@@ -18,7 +18,7 @@ fun Fragment.showSnackBar(state: SnackBarState) = state.apply {
     val hasMessage = message.hasValue(context)
     val hasButton = buttonText.hasValue(context)
 
-    val snackbar = Snackbar.make(this@showSnackBar.requireView(), SNACKBAR_TAG, Snackbar.LENGTH_LONG)
+    val snackbar = Snackbar.make(requireView(), SNACKBAR_TAG, Snackbar.LENGTH_LONG)
 
     val customSnackView = layoutInflater.inflate(R.layout.item_snackbar, null).apply {
         backgroundColor?.let {
@@ -54,7 +54,8 @@ fun Fragment.showSnackBar(state: SnackBarState) = state.apply {
     snackbar.view.apply {
         setBackgroundColor(Color.TRANSPARENT)
         setPadding(0, 0, 0, 0)
-        (this as Snackbar.SnackbarLayout).addView(customSnackView, 0)
+        (this as? Snackbar.SnackbarLayout)?.removeAllViews()
+        (this as? Snackbar.SnackbarLayout)?.addView(customSnackView, 0)
     }
 
     snackbar.show()
