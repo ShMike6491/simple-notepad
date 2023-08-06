@@ -22,23 +22,12 @@ class FilesViewModel(
     private val repository: IFilesRepository
 ) : ViewModel() {
 
-    // todo: remove and switch to repo data
-    private val actualFiles = repository.observeAllFiles()
-        .map { mapToStateData(it) }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
-
-    private val emptyData = emptyList<FileState>()
-    private val testData = listOf(
-        FileState("1", DynamicString("First file")),
-        // fixme: learn how to prevent long title text size to change
-        FileState("2", DynamicString("A file with a very long name")),
-        FileState("3", DynamicString("Third file")),
-    )
-
     private val eventChannel = Channel<UiEvent>()
     val uiEvent = eventChannel.receiveAsFlow()
 
-    val stateData: StateFlow<List<FileState>> = MutableStateFlow(testData) //change here
+    val stateData: StateFlow<List<FileState>> = repository.observeAllFiles()
+        .map { mapToStateData(it) }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val defaultEmptyState = UiError(
         errorImage = R.drawable.image_question,
