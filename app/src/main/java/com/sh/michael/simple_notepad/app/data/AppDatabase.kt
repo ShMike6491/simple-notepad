@@ -8,17 +8,21 @@ import androidx.room.TypeConverters
 import com.sh.michael.simple_notepad.feature_notes.data.BackgroundConverter
 import com.sh.michael.simple_notepad.feature_notes.data.StickyNotesDao
 import com.sh.michael.simple_notepad.feature_notes.data.model.RoomStickyNote
+import com.sh.michael.simple_notepad.feature_pages.data.PagesDao
+import com.sh.michael.simple_notepad.feature_pages.data.model.RoomPage
 
 @Database(
     entities = [
-        RoomStickyNote::class
+        RoomStickyNote::class,
+        RoomPage::class
     ],
-    version = 2
+    version = 3
 )
 @TypeConverters(BackgroundConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun stickyNotesDao(): StickyNotesDao
+    abstract fun pagesDao(): PagesDao
 
     companion object {
 
@@ -26,6 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
         private var INSTANCE: AppDatabase? = null
         private const val DATABASE_TAG = "app_database"
 
+        // todo: initialize database with default files and pages data
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(

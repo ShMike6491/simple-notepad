@@ -11,9 +11,15 @@
     <color name="chinese_white">#e1e1e0</color>
     <color name="cultured">#f5f5f5</color>
 
+    <color name="silver_chalice">#ACACAC</color>
+
     <color name="red_orange">#ffffab91</color>
     <color name="red_pink">#fff48fb1</color>
     <color name="baby_blue">#ff81deea</color>
     <color name="violet">#ffcf94da</color>
     <color name="light_green">#ffe7ed9b</color>
+
+    <color name="error_red">#bb2124</color>
+    <color name="green_success">#22bb33</color>
+    <color name="blue_netrual">#5bc0de</color>
 </resources>

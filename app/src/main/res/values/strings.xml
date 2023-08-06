@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Notepad</string>
     <string name="note_hint_text">Type note…</string>
+    <string name="page_hint_text">Write here…</string>
+    <string name="error">Error occurred</string>
+    <string name="something_went_wrong">Oops! Something went wrong…</string>
+    <string name="error_retreiving_page">Error: cannot find file`s data</string>
+    <string name="page_error_helper">Looks like there was a problem with the file. Try refreshing the app or create a new file.</string>
 </resources>

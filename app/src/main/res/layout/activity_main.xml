@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/stickyNotesFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.sh.michael.simple_notepad.feature_notes.ui.StickyNotesFragment"/>
+        android:layout_height="match_parent"
+        android:name="com.sh.michael.simple_notepad.feature_pages.ui.PagesFragment"/>
 
 </FrameLayout>
