@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/chinese_white"
+    android:id="@+id/pagesRootLayout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:background="@null"
+        android:gravity="start"
+        android:id="@+id/mainEditText"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_gap_medium"
+        android:layout_width="match_parent"
+        android:singleLine="false"
+        tools:text="@tools:sample/lorem/random" />
+
+    <ProgressBar
+        android:id="@+id/loadingBar"
+        android:indeterminateTint="@color/banana_yellow"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <include
+        layout="@layout/error_layout"
+        android:id="@+id/errorContainer"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</FrameLayout>
