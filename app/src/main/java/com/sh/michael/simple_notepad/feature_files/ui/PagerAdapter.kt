@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.sh.michael.simple_notepad.common.model.UiString
 import com.sh.michael.simple_notepad.feature_files.ui.model.FileState
+import com.sh.michael.simple_notepad.feature_pages.ui.PagesFragment
 
 class PagerAdapter(
     manager: FragmentManager,
@@ -17,7 +18,7 @@ class PagerAdapter(
 
     override fun getItemCount(): Int = files.size
 
-    override fun createFragment(position: Int): Fragment =  TempFragment.newInstance(files[position].id)
+    override fun createFragment(position: Int): Fragment =  PagesFragment.newInstance(files[position].id)
 
     override fun containsItem(itemId: Long): Boolean =  fileIds.contains(itemId)
 
