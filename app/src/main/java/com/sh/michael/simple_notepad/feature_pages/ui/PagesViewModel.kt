@@ -40,6 +40,7 @@ class PagesViewModel(
         .stateIn(viewModelScope, SharingStarted.Eagerly, initialValue)
 
     private fun onTextChanged(value: CharSequence?) = viewModelScope.launch {
+        // fixme: does not save the changes!!
         if (value == stateData.value.valueText) return@launch
 
         currentPageId.get()?.let {
