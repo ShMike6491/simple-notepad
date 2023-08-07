@@ -49,6 +49,18 @@ fun EditText.afterTextChangedListener(changeListener: (CharSequence?) -> Unit) {
     addTextChangedListener(textWatcher)
 }
 
+fun EditText.onTextChangedListener(changeListener: (CharSequence?) -> Unit) {
+    val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { doNothing() }
+        override fun afterTextChanged(p0: Editable?) { doNothing() }
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int)  {
+            changeListener.invoke(p0.toString())
+        }
+    }
+
+    addTextChangedListener(textWatcher)
+}
+
 fun EditText.setMaxValue(value: Int) {
     filters = arrayOf(
         InputFilter.LengthFilter(value)
