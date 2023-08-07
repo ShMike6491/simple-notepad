@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@null"
+    android:backgroundTint="@null"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingTop="@dimen/default_gap_medium"
+    tools:ignore="Overdraw">
+
+    <View
+        android:background="@drawable/background_dialog_handle"
+        android:id="@+id/handleView"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_height="6dp"
+        android:layout_width="60dp" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/background_bottom_dialog_main"
+        android:id="@+id/contentLayout"
+        android:layout_height="match_parent"
+        android:layout_marginTop="18dp"
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/default_gap_extra_large">
+
+        <ImageView
+            android:id="@+id/exitImageView"
+            android:layout_height="34dp"
+            android:layout_margin="34dp"
+            android:layout_width="34dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:background="@null"
+            android:id="@+id/fileNameEditText"
+            android:layout_height="200dp"
+            android:layout_marginBottom="@dimen/default_gap_large"
+            android:layout_width="200dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@id/footerTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/exitImageView"
+            tools:text="@tools:sample/lorem/random" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/footerTextView"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="25/50" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/actionButton"
+        android:layout_gravity="bottom|end"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_gap_medium"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_edit" />
+
+</FrameLayout>
