@@ -20,6 +20,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@drawable/background_bottom_dialog_main"
+        android:backgroundTint="@color/chinese_white"
         android:id="@+id/contentLayout"
         android:layout_height="match_parent"
         android:layout_marginTop="18dp"
