@@ -12,6 +12,7 @@ class PagesRepositoryImpl(
 ) : IPagesRepository {
 
     private val pagesDao = database.pagesDao()
+    private val filesDao = database.filesDao()
 
     override fun observePageForId(fileId: String): Flow<IPage?> {
         return pagesDao.observePageOfFile(fileId)
@@ -50,5 +51,10 @@ class PagesRepositoryImpl(
 
     override suspend fun getPageByFile(fileId: String): IPage? {
         return pagesDao.getPageByFileId(fileId)
+    }
+
+    override suspend fun deleteAllFilesData(fileId: String) {
+        filesDao.deleteById(fileId)
+        pagesDao.deleteByFileId(fileId)
     }
 }

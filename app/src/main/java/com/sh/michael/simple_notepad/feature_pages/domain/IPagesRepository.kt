@@ -18,4 +18,7 @@ interface IPagesRepository {
     suspend fun getPageById(pageId: String): IPage?
 
     suspend fun getPageByFile(fileId: String): IPage?
+
+    // todo: possibly move to a separate interactor
+    suspend fun deleteAllFilesData(fileId: String)
 }
