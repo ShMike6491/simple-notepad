@@ -34,6 +34,8 @@ class PagesViewModelTest {
     private lateinit var viewModel: PagesViewModel
     private val testObserverState = mutableListOf<PageState>()
 
+    // todo: add tests for delete action
+
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)

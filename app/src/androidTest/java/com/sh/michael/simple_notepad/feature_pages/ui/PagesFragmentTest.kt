@@ -39,6 +39,8 @@ class PagesFragmentTest {
     private val mockEvent: UiEvent = mockk()
     private val mockState: PageState = mockk()
 
+    // todo: add delete icon tests
+
     @Before
     fun setup() {
         val module = module {
