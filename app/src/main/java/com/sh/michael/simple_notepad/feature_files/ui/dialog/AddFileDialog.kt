@@ -2,7 +2,6 @@ package com.sh.michael.simple_notepad.feature_files.ui.dialog
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
@@ -19,11 +18,10 @@ import com.sh.michael.simple_notepad.common.doNothing
 import com.sh.michael.simple_notepad.common.hideKeyboard
 import com.sh.michael.simple_notepad.common.model.UiEvent
 import com.sh.michael.simple_notepad.common.onTextChangedListener
-import com.sh.michael.simple_notepad.common.setMaxValue
 import com.sh.michael.simple_notepad.common.showSnackBar
 import com.sh.michael.simple_notepad.common.viewBinding
+import com.sh.michael.simple_notepad.common.windowView
 import com.sh.michael.simple_notepad.databinding.DialogAddFileBinding
-import com.sh.michael.simple_notepad.feature_files.ui.dialog.AddFileViewModel.Companion.MAX_FILE_TITLE_LENGTH
 import com.sh.michael.simple_notepad.feature_files.ui.model.AddFileState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,9 +47,8 @@ class AddFileDialog : BottomSheetDialogFragment(R.layout.dialog_add_file) {
         catchLifecycleFlow(viewModel.uiEvent) { event ->
             when (event) {
                 is UiEvent.ShowSnackbar -> {
-                    // fixme: snackbar is not showing
-//                    hideKeyboard()
-//                    showSnackBar(event.state)
+                    hideKeyboard()
+                    showSnackBar(event.state, windowView)
                 }
                 is UiEvent.PopBackStack -> dialog?.dismiss()
                 else -> doNothing()
