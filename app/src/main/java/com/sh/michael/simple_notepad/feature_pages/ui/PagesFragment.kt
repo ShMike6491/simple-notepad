@@ -7,6 +7,7 @@ import com.sh.michael.simple_notepad.R
 import com.sh.michael.simple_notepad.common.afterTextChangedListener
 import com.sh.michael.simple_notepad.common.applyOnce
 import com.sh.michael.simple_notepad.common.catchLifecycleFlow
+import com.sh.michael.simple_notepad.common.clickWithDebounce
 import com.sh.michael.simple_notepad.common.collectLatestLifecycleFlow
 import com.sh.michael.simple_notepad.common.model.UiError
 import com.sh.michael.simple_notepad.common.model.UiEvent.*
@@ -42,15 +43,23 @@ class PagesFragment : Fragment(R.layout.fragment_pages) {
         }
     }
 
-    private fun renderPage(data: PageState) = binding.mainEditText.apply {
-        hint = data.hintText?.asString(context)
-        isEnabled = data.isPageEnabled
+    private fun renderPage(data: PageState) = binding.apply {
+        data.onDeleteIconClick?.let {  callback ->
+            deleteIcon.applyOnce {
+                clickWithDebounce { callback.invoke() }
+            }
+        }
 
-        applyOnce {
-            setText(data.bodyText?.asString(context))
+        mainEditText.apply {
+            hint = data.hintText?.asString(context)
+            isEnabled = data.isPageEnabled
 
-            data.onTextChangeAction?.let {
-                afterTextChangedListener(it)
+            applyOnce {
+                setText(data.bodyText?.asString(context))
+
+                data.onTextChangeAction?.let {
+                    afterTextChangedListener(it)
+                }
             }
         }
     }
