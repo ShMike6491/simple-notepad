@@ -15,7 +15,8 @@ data class PageState(
     val error: UiError? = null,
     val isLoading: Boolean = true,
     val isPageEnabled: Boolean = false,
-    val onTextChangeAction: ((sequence: CharSequence?) -> Unit)? = null
+    val onTextChangeAction: ((sequence: CharSequence?) -> Unit)? = null,
+    val onDeleteIconClick: (() -> Unit)? = null
 ) : Identifiable {
     val bodyText: UiString? get() = valueText?.let { DynamicString(it) }
     val hasError: Boolean get() = error != null
