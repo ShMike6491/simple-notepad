@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sh.michael.simple_notepad.R
 import com.sh.michael.simple_notepad.common.model.ERROR_SNACKBAR
+import com.sh.michael.simple_notepad.common.model.SUCCESS_SNACKBAR
 import com.sh.michael.simple_notepad.common.model.UiEvent
 import com.sh.michael.simple_notepad.common.model.UiString
 import com.sh.michael.simple_notepad.common.model.UiString.*
@@ -70,6 +71,7 @@ class AddFileViewModel(
             withContext(Dispatchers.IO) {
                 repository.createFile(fileName = it)
             }
+            showSuccess()
             onClose()
         }
     }
@@ -86,6 +88,14 @@ class AddFileViewModel(
         }
 
         return true
+    }
+
+    private fun showSuccess() = viewModelScope.launch {
+        val successSnackbar = SUCCESS_SNACKBAR.copy(
+            title = StringResource(R.string.new_file_was_created)
+        )
+
+        eventChannel.send(UiEvent.ShowSecondarySnackbar(successSnackbar))
     }
 
     private fun showError(message: UiString) = viewModelScope.launch {
