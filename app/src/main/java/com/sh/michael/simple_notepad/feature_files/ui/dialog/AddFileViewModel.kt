@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sh.michael.simple_notepad.R
 import com.sh.michael.simple_notepad.common.model.ERROR_SNACKBAR
-import com.sh.michael.simple_notepad.common.model.SUCCESS_SNACKBAR
 import com.sh.michael.simple_notepad.common.model.UiEvent
+import com.sh.michael.simple_notepad.common.model.UiString
 import com.sh.michael.simple_notepad.common.model.UiString.*
 import com.sh.michael.simple_notepad.feature_files.domain.IFilesRepository
 import com.sh.michael.simple_notepad.feature_files.ui.model.AddFileState
@@ -24,7 +24,7 @@ class AddFileViewModel(
 
     private val initialState: AddFileState = AddFileState(
         id = UUID.randomUUID().toString(),
-        helperText = DynamicString("Type here..."),
+        helperText = StringResource(R.string.enter_file_name),
         footerText = DynamicString("0/$MAX_FILE_TITLE_LENGTH"),
         footerTextColor = R.color.granite_gray,
         titleChangeListener = this::onTextChange,
@@ -70,36 +70,27 @@ class AddFileViewModel(
             withContext(Dispatchers.IO) {
                 repository.createFile(fileName = it)
             }
-            showSuccess()
             onClose()
         }
     }
 
     private fun isFormValid(): Boolean {
         if (pageState.value.value.isNullOrBlank()) {
-            showError("You must provide title")
+            showError(DynamicString("You must provide title"))
             return false
         }
 
         if (pageState.value.value!!.length > MAX_FILE_TITLE_LENGTH) {
-            showError("Title is too long")
+            showError(StringResource(R.string.title_is_too_long))
             return false
         }
 
         return true
     }
 
-    private fun showSuccess() = viewModelScope.launch {
-        val successSnackbar = SUCCESS_SNACKBAR.copy(
-            title = DynamicString("New file was created!")
-        )
-
-        eventChannel.send(UiEvent.ShowSnackbar(successSnackbar))
-    }
-
-    private fun showError(message: String) = viewModelScope.launch {
+    private fun showError(message: UiString) = viewModelScope.launch {
         val successSnackbar = ERROR_SNACKBAR.copy(
-            title = DynamicString(message)
+            title = message
         )
 
         eventChannel.send(UiEvent.ShowSnackbar(successSnackbar))
