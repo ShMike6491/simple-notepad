@@ -18,6 +18,10 @@ class PagerAdapter(
 
     override fun getItemCount(): Int = files.size
 
+    override fun getItemId(position: Int): Long {
+        return files[position].id.hashCode().toLong()
+    }
+
     override fun createFragment(position: Int): Fragment =  PagesFragment.newInstance(files[position].id)
 
     override fun containsItem(itemId: Long): Boolean =  fileIds.contains(itemId)
