@@ -8,6 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDE
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sh.michael.simple_notepad.R
+import com.sh.michael.simple_notepad.common.activityWindow
 import com.sh.michael.simple_notepad.common.addKeyboardStateListener
 import com.sh.michael.simple_notepad.common.applyOnce
 import com.sh.michael.simple_notepad.common.asColorStateList
@@ -49,6 +50,10 @@ class AddFileDialog : BottomSheetDialogFragment(R.layout.dialog_add_file) {
                 is UiEvent.ShowSnackbar -> {
                     hideKeyboard()
                     showSnackBar(event.state, windowView)
+                }
+                is UiEvent.ShowSecondarySnackbar -> {
+                    hideKeyboard()
+                    showSnackBar(event.state, activityWindow)
                 }
                 is UiEvent.PopBackStack -> dialog?.dismiss()
                 else -> doNothing()
