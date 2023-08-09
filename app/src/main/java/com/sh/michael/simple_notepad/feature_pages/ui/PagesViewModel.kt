@@ -60,7 +60,7 @@ class PagesViewModel(
 //        if (stateData.value.valueText == page.pageText) return stateData.value
 
         return initialValue.copy(
-            valueText = page.pageText,
+            valueText = page.pageText ?: "",
             hintText = StringResource(R.string.page_hint_text),
             isLoading = false,
             isPageEnabled = true,
