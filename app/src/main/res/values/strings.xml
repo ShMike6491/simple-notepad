@@ -1,11 +1,18 @@
 <resources>
     <string name="app_name">Notepad</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="delete">Delete</string>
+    <string name="delete_caps">DELETE</string>
     <string name="note_hint_text">Type note…</string>
     <string name="page_hint_text">Write here…</string>
+    <string name="enter_file_name">Enter file name…</string>
     <string name="error">Error occurred</string>
     <string name="something_went_wrong">Oops! Something went wrong…</string>
+    <string name="new_file_was_created">New file was created!</string>
+    <string name="title_is_too_long">Title is too long</string>
     <string name="nothing_found">Nothing found…</string>
     <string name="error_retreiving_page">Error: cannot find file`s data</string>
     <string name="page_error_helper">Looks like there was a problem with the file. Try refreshing the app or create a new file.</string>
+    <string name="delete_confirmation_helper">This action will delete all the file`s data and cannot be undone.</string>
     <string name="empty_files_helper">Looks like you haven`t made any notes yet</string>
 </resources>
