@@ -21,13 +21,17 @@ inline fun <T : View> T.showAndApplyIf(condition: Boolean, block: T.() -> Unit):
 
 /**
  * Allows to apply block of code to view only once
+ *
+ * [key] parameter is required for cases when you need to set several apply blocks to the same view.
+ * Each key will be used for individual use case.
  */
-inline fun <T : View> T.applyOnce(block: T.() -> Unit): T {
-    val tagNotSet = (this.tag == null)
+inline fun <T : View> T.applyOnce(key: String = "defaultKey", block: T.() -> Unit): T {
+    val tagSet = (tag as? Set<*>) ?: setOf<String>()
+    val tagNotSet = tagSet.contains(key).not()
 
     if (tagNotSet) {
         this.apply(block)
-        this.tag = true
+        this.tag = tagSet.plus(key)
     }
 
     return this
