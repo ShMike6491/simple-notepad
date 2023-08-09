@@ -54,11 +54,15 @@ class PagesFragment : Fragment(R.layout.fragment_pages) {
             hint = data.hintText?.asString(context)
             isEnabled = data.isPageEnabled
 
-            applyOnce {
-                setText(data.bodyText?.asString(context))
+            data.bodyText?.let { text ->
+                applyOnce("bodyText") {
+                    setText(text.asString(context))
+                }
+            }
 
-                data.onTextChangeAction?.let {
-                    afterTextChangedListener(it)
+            data.onTextChangeAction?.let { action ->
+                applyOnce("textChangeAction") {
+                    afterTextChangedListener(action)
                 }
             }
         }
