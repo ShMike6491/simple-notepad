@@ -4,6 +4,7 @@ import com.sh.michael.simple_notepad.app.data.AppDatabase
 import com.sh.michael.simple_notepad.feature_pages.data.model.RoomPage
 import com.sh.michael.simple_notepad.feature_pages.domain.IPagesRepository
 import com.sh.michael.simple_notepad.feature_pages.domain.model.IPage
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 
@@ -55,6 +56,8 @@ class PagesRepositoryImpl(
 
     override suspend fun deleteAllFilesData(fileId: String) {
         filesDao.deleteById(fileId)
+        // needs to delay due to quick rendering
+        delay(200)
         pagesDao.deleteByFileId(fileId)
     }
 }
