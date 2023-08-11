@@ -32,7 +32,6 @@ class PagesViewModelTest {
     private val testDispatcher = TestCoroutineDispatcher()
     private val mockRepo: IPagesRepository = mockk()
     private lateinit var viewModel: PagesViewModel
-    private val testObserverState = mutableListOf<PageState>()
 
     // todo: add tests for delete action
 
@@ -45,7 +44,6 @@ class PagesViewModelTest {
     fun teardown() {
         Dispatchers.resetMain()
         testDispatcher.cleanupTestCoroutines()
-        testObserverState.clear()
         clearMocks(mockRepo)
     }
 
