@@ -7,6 +7,7 @@ import com.sh.michael.simple_notepad.R
 import com.sh.michael.simple_notepad.common.applyOnce
 import com.sh.michael.simple_notepad.common.catchLifecycleFlow
 import com.sh.michael.simple_notepad.common.collectLatestLifecycleFlow
+import com.sh.michael.simple_notepad.common.disableScroll
 import com.sh.michael.simple_notepad.common.doNothing
 import com.sh.michael.simple_notepad.common.model.UiEvent
 import com.sh.michael.simple_notepad.common.rotateView
@@ -30,6 +31,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.appbar.disableScroll()
 
         collectLatestLifecycleFlow(viewModel.stateData) { home ->
             renderPage(home)
