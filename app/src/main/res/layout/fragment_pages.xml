@@ -1,20 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/chinese_white"
     android:id="@+id/pagesRootLayout"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:gravity="end"
+        android:id="@+id/actionsBarLayout"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_gap_small"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:clickable="true"
+            android:contentDescription="@string/delete"
+            android:focusable="true"
+            android:id="@+id/deleteIcon"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/delete_button_selector" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
     <androidx.appcompat.widget.AppCompatEditText
         android:background="@null"
         android:gravity="start"
         android:id="@+id/mainEditText"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_gap_medium"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/default_gap_medium"
+        android:layout_marginHorizontal="@dimen/default_gap_medium"
+        android:layout_marginTop="@dimen/default_gap_extra_large"
         android:layout_width="match_parent"
         android:singleLine="false"
+        android:textAlignment="textStart"
         tools:text="@tools:sample/lorem/random" />
 
     <ProgressBar

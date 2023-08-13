@@ -3,6 +3,8 @@ package com.sh.michael.simple_notepad.feature_pages.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sh.michael.simple_notepad.R
+import com.sh.michael.simple_notepad.common.doNothing
+import com.sh.michael.simple_notepad.common.model.DEFAULT_SNACKBAR
 import com.sh.michael.simple_notepad.common.model.ERROR_SNACKBAR
 import com.sh.michael.simple_notepad.common.model.UiEvent
 import com.sh.michael.simple_notepad.common.model.UiString.*
@@ -29,7 +31,8 @@ class PagesViewModel(
     private val currentPageId = AtomicReference<String?>(null)
     private val errorState = initialValue.copy(
         error = pageErrorState,
-        isLoading = false
+        isLoading = false,
+        onDeleteIconClick = this::onDeleteClick
     )
 
     private val eventChannel = Channel<UiEvent>()
@@ -57,13 +60,34 @@ class PagesViewModel(
 //        if (stateData.value.valueText == page.pageText) return stateData.value
 
         return initialValue.copy(
-            valueText = page.pageText,
+            valueText = page.pageText ?: "",
             hintText = StringResource(R.string.page_hint_text),
             isLoading = false,
             isPageEnabled = true,
             error = null,
-            onTextChangeAction = this::onTextChanged
+            onTextChangeAction = this::onTextChanged,
+            onDeleteIconClick = this::onDeleteClick
         )
+    }
+
+    private fun onDeleteClick() {
+        viewModelScope.launch {
+            val title = StringResource(R.string.are_you_sure)
+            val message = StringResource(R.string.delete_confirmation_helper)
+            val button = StringResource(R.string.delete_caps)
+            val state = DEFAULT_SNACKBAR.copy(
+                title = title,
+                message = message,
+                buttonText = button,
+                onActionClick = { onDeleteConfirm() }
+            )
+            val event = UiEvent.ShowSnackbar(state)
+            eventChannel.send(event)
+        }
+    }
+
+    private fun onDeleteConfirm() = viewModelScope.launch {
+        if (fileId == null) doNothing() else repository.deleteAllFilesData(fileId)
     }
 
     private fun showErrorMessage() {

@@ -23,6 +23,21 @@
 
     <style name="Theme.Simplenotepad.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="FileTabs">
+        <item name="android:background">@color/granite_gray</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabUnboundedRipple">true</item>
+        <item name="tabBackground">@drawable/file_tag</item>
+        <item name="tabMode">scrollable</item>
+        <item name="tabGravity">start</item>
+        <item name="tabSelectedTextColor">@color/granite_gray</item>
+        <item name="tabTextColor">@color/chinese_white</item>
+        <item name="tabIconTint">@color/chinese_white</item>
+        <item name="tabMinWidth">50dp</item>
+        <item name="tabTextAppearance">@style/CustomTabsText</item>
+        <item name="tabSelectedTextAppearance">@style/CustomTabsText</item>
+    </style>
+
     <style name="ScrollBar">
         <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>

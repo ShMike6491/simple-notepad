@@ -25,6 +25,8 @@ class PagesRepositoryImplTest {
 
     private lateinit var repository: PagesRepositoryImpl
 
+    // todo: add tests for delete action
+
     @Before
     fun setup() {
         every { mockDatabase.pagesDao() } returns mockDao

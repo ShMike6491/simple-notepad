@@ -1,6 +1,7 @@
 package com.sh.michael.simple_notepad.common
 
 import android.graphics.Color
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -12,13 +13,13 @@ import com.sh.michael.simple_notepad.common.model.hasValue
 
 const val SNACKBAR_TAG = "default snackbar"
 
-fun Fragment.showSnackBar(state: SnackBarState) = state.apply {
+fun Fragment.showSnackBar(state: SnackBarState, view: View = requireView()) = state.apply {
     val hasIcon = icon != null
     val hasTitle = title.hasValue(context)
     val hasMessage = message.hasValue(context)
     val hasButton = buttonText.hasValue(context)
 
-    val snackbar = Snackbar.make(requireView(), SNACKBAR_TAG, Snackbar.LENGTH_LONG)
+    val snackbar = Snackbar.make(view, SNACKBAR_TAG, Snackbar.LENGTH_LONG)
 
     val customSnackView = layoutInflater.inflate(R.layout.item_snackbar, null).apply {
         backgroundColor?.let {

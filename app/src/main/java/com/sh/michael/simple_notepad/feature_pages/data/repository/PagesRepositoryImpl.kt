@@ -4,6 +4,7 @@ import com.sh.michael.simple_notepad.app.data.AppDatabase
 import com.sh.michael.simple_notepad.feature_pages.data.model.RoomPage
 import com.sh.michael.simple_notepad.feature_pages.domain.IPagesRepository
 import com.sh.michael.simple_notepad.feature_pages.domain.model.IPage
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 
@@ -12,6 +13,7 @@ class PagesRepositoryImpl(
 ) : IPagesRepository {
 
     private val pagesDao = database.pagesDao()
+    private val filesDao = database.filesDao()
 
     override fun observePageForId(fileId: String): Flow<IPage?> {
         return pagesDao.observePageOfFile(fileId)
@@ -50,5 +52,12 @@ class PagesRepositoryImpl(
 
     override suspend fun getPageByFile(fileId: String): IPage? {
         return pagesDao.getPageByFileId(fileId)
+    }
+
+    override suspend fun deleteAllFilesData(fileId: String) {
+        filesDao.deleteById(fileId)
+        // needs to delay due to quick rendering
+        delay(200)
+        pagesDao.deleteByFileId(fileId)
     }
 }

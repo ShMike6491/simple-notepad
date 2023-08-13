@@ -34,6 +34,7 @@ class StickyNoteRepositoryImpl(
     }
 
     override suspend fun createNote(noteText: String, color: BackgroundColor) {
+        // fixme: eventually priority will get to MAX_INT_VALUE and we will need to deal with it
         val highestPriority = notesDao.getHighestPriority() ?: 0
         val newNote = RoomStickyNote(
             id = UUID.randomUUID().toString(),
