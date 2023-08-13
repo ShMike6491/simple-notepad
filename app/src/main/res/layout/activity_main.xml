@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/granite_gray"
+    android:id="@+id/auth_nav_host_fragment"
+    android:name="androidx.navigation.fragment.NavHostFragment"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
-
-    <fragment
-        android:id="@+id/stickyNotesFragment"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:name="com.sh.michael.simple_notepad.feature_files.ui.FilesFragment" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/testButton"
-        android:layout_gravity="bottom|end"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_gap_medium"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
-</FrameLayout>
+    app:defaultNavHost="true"
+    app:navGraph="@navigation/nav_graph"
+    tools:ignore="FragmentTagUsage" />
