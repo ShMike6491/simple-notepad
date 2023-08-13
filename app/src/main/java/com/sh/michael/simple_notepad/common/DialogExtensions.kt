@@ -6,7 +6,3 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 val BottomSheetDialogFragment.windowView: View get() {
     return dialog?.window?.decorView ?: requireView()
 }
-
-val BottomSheetDialogFragment.activityWindow: View get() {
-    return activity?.window?.decorView ?: requireView()
-}
