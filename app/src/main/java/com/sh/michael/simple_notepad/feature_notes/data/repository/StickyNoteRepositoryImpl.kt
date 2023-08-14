@@ -44,4 +44,15 @@ class StickyNoteRepositoryImpl(
         )
         notesDao.insert(newNote)
     }
+
+    override suspend fun insertNote(note: IStickyNote) {
+        val newNote = RoomStickyNote(
+            id = note.id,
+            priority = note.priority,
+            backgroundColor = note.backgroundColor,
+            noteText = note.noteText
+        )
+
+        notesDao.insert(newNote)
+    }
 }
