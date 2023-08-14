@@ -13,7 +13,7 @@ import com.sh.michael.simple_notepad.common.model.hasValue
 
 const val SNACKBAR_TAG = "default snackbar"
 
-fun Fragment.showSnackBar(state: SnackBarState, view: View = requireView()) = state.apply {
+fun Fragment.showSnackBar(state: SnackBarState, view: View = requireActivity().findViewById(R.id.addNewFab)) = state.apply {
     val hasIcon = icon != null
     val hasTitle = title.hasValue(context)
     val hasMessage = message.hasValue(context)
