@@ -6,6 +6,8 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.appbar.AppBarLayout
 
 fun View?.showIf(condition: Boolean): Boolean {
     this?.visibility = if (condition) View.VISIBLE else View.GONE
@@ -82,4 +84,19 @@ fun View.clickWithDebounce(debounceTime: Long = 600L, action: () -> Unit) {
             lastClickTime = SystemClock.elapsedRealtime()
         }
     })
+}
+
+/**
+ * in coordinator layout we don't always need app bar to be scrollable.
+ * this extension disables scroll
+ */
+fun AppBarLayout.disableScroll() {
+    val params = layoutParams as? CoordinatorLayout.LayoutParams
+    val callback = object : AppBarLayout.Behavior.DragCallback() {
+        override fun canDrag(appBar: AppBarLayout) = false
+    }
+
+    params?.behavior = AppBarLayout.Behavior().also {
+        it.setDragCallback(callback)
+    }
 }
