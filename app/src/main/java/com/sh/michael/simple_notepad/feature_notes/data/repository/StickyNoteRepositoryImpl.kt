@@ -33,6 +33,14 @@ class StickyNoteRepositoryImpl(
         }
     }
 
+    override suspend fun updateItems(notes: List<IStickyNote>) {
+        val updatedListWithPriority = notes.mapIndexed { index, item ->
+            item.asRoomEntity().copy(priority = notes.size - index)
+        }
+
+        notesDao.update(updatedListWithPriority)
+    }
+
     override suspend fun createNote(noteText: String, color: BackgroundColor) {
         // fixme: eventually priority will get to MAX_INT_VALUE and we will need to deal with it
         val highestPriority = notesDao.getHighestPriority() ?: 0
@@ -46,13 +54,15 @@ class StickyNoteRepositoryImpl(
     }
 
     override suspend fun insertNote(note: IStickyNote) {
-        val newNote = RoomStickyNote(
-            id = note.id,
-            priority = note.priority,
-            backgroundColor = note.backgroundColor,
-            noteText = note.noteText
-        )
+        notesDao.insert(note.asRoomEntity())
+    }
 
-        notesDao.insert(newNote)
+    private fun IStickyNote.asRoomEntity(): RoomStickyNote {
+        return RoomStickyNote(
+            id = this.id,
+            priority = this.priority,
+            backgroundColor = this.backgroundColor,
+            noteText = this.noteText
+        )
     }
 }

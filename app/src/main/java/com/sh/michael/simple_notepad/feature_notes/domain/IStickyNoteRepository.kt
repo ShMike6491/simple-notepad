@@ -12,6 +12,8 @@ interface IStickyNoteRepository {
 
     suspend fun updateItemsPosition(fromPosition: Int, toPosition: Int)
 
+    suspend fun updateItems(notes: List<IStickyNote>)
+
     suspend fun createNote(noteText: String, color: BackgroundColor)
 
     suspend fun insertNote(note: IStickyNote)
