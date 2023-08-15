@@ -26,7 +26,7 @@ class StickyNotesFragment : Fragment(R.layout.fragment_sticky_notes) {
 
         binding.notesRecycler.adapter = adapter
 
-        val touchHelperCallback = adapter.ItemTouchHelperCallback(viewModel::notesPositionChanged)
+        val touchHelperCallback = adapter.DragAndDropCallback(viewModel::notifyItemsPositionChanged)
         val itemTouchHelper = ItemTouchHelper(touchHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding.notesRecycler)
 
