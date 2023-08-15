@@ -13,27 +13,28 @@ import com.sh.michael.simple_notepad.R
 import com.sh.michael.simple_notepad.common.addKeyboardStateListener
 import com.sh.michael.simple_notepad.common.afterTextChangedListener
 import com.sh.michael.simple_notepad.common.asColorStateList
+import com.sh.michael.simple_notepad.common.catchLifecycleFlow
 import com.sh.michael.simple_notepad.common.clickWithDebounce
 import com.sh.michael.simple_notepad.common.collectLatestLifecycleFlow
 import com.sh.michael.simple_notepad.common.doNothing
-import com.sh.michael.simple_notepad.common.interfaces.INavigationCallback
+import com.sh.michael.simple_notepad.common.hideKeyboard
+import com.sh.michael.simple_notepad.common.model.UiEvent
 import com.sh.michael.simple_notepad.common.setMaxValue
 import com.sh.michael.simple_notepad.common.showAndApplyIf
+import com.sh.michael.simple_notepad.common.showSnackBar
 import com.sh.michael.simple_notepad.common.viewBinding
 import com.sh.michael.simple_notepad.databinding.DialogAddStickyNoteBinding
-import com.sh.michael.simple_notepad.feature_notes.ui.dialog.AddNoteViewModel.Companion.DIALOG_DISMISS_ACTION
 import com.sh.michael.simple_notepad.feature_notes.ui.dialog.AddNoteViewModel.Companion.MAX_NOTE_LENGTH
 import com.sh.michael.simple_notepad.feature_notes.ui.model.AddNoteState
 import com.sh.michael.simple_notepad.feature_notes.ui.model.ColorOption
 import com.sh.michael.simple_notepad.feature_notes.ui.model.backgroundColor
 import com.sh.michael.simple_notepad.feature_notes.ui.model.hintText
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 import java.util.concurrent.atomic.AtomicBoolean
 
-class AddNoteDialog : BottomSheetDialogFragment(R.layout.dialog_add_sticky_note), INavigationCallback {
+class AddNoteDialog : BottomSheetDialogFragment(R.layout.dialog_add_sticky_note) {
 
-    private val viewModel: AddNoteViewModel by viewModel { parametersOf(this) }
+    private val viewModel: AddNoteViewModel by viewModel()
     private val binding by viewBinding(DialogAddStickyNoteBinding::bind)
     private val hasBeenInitialized = AtomicBoolean(false)
 
@@ -41,6 +42,8 @@ class AddNoteDialog : BottomSheetDialogFragment(R.layout.dialog_add_sticky_note)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.noteEditText.requestFocus()
 
         addKeyboardStateListener(binding) { _, isOpen ->
             val dialog = dialog as? BottomSheetDialog
@@ -50,11 +53,17 @@ class AddNoteDialog : BottomSheetDialogFragment(R.layout.dialog_add_sticky_note)
         }
 
         collectLatestLifecycleFlow(viewModel.pageState) { renderPage(it) }
-    }
 
-    override fun onNavigate(action: String) = when(action) {
-        DIALOG_DISMISS_ACTION -> dismiss()
-        else -> doNothing()
+        catchLifecycleFlow(viewModel.uiEvent) { event ->
+            when (event) {
+                is UiEvent.ShowSnackbar -> {
+                    hideKeyboard()
+                    showSnackBar(event.state,)
+                }
+                is UiEvent.PopBackStack -> dialog?.dismiss()
+                else -> doNothing()
+            }
+        }
     }
 
     private fun renderPage(state: AddNoteState) = binding.apply {
