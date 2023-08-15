@@ -29,8 +29,8 @@ class StickyNotesViewModel(
     val stateData: Flow<List<StickyNoteState>> get() = repo.observeAllNotes()
         .map { it.mapAsStateData() }
 
-    fun notesPositionChanged(fromPosition: Int, toPosition: Int) = viewModelScope.launch {
-        repo.updateItemsPosition(fromPosition, toPosition)
+    fun notifyItemsPositionChanged(list: List<StickyNoteState>) = viewModelScope.launch {
+        repo.updateItems(list)
     }
 
     private fun removeNote(noteId: String) = viewModelScope.launch {
