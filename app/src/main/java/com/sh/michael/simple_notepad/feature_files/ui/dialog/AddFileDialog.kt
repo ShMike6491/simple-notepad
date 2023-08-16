@@ -35,6 +35,8 @@ class AddFileDialog : BottomSheetDialogFragment(R.layout.dialog_add_file) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.fileNameEditText.requestFocus()
+
         addKeyboardStateListener(binding) { _, isOpen ->
             val dialog = dialog as? BottomSheetDialog
             val dialogState = if (isOpen) STATE_EXPANDED else STATE_COLLAPSED

@@ -10,9 +10,10 @@
     <string name="error">Error occurred</string>
     <string name="something_went_wrong">Oops! Something went wrong…</string>
     <string name="new_file_was_created">New file was created!</string>
+    <string name="new_note_was_created">New note was created!</string>
     <string name="title_is_too_long">Title is too long</string>
     <string name="nothing_found">Nothing found…</string>
-    <string name="removed_note_message">Sticky note was deleted</string>
+    <string name="removed_note_message">Selected note was deleted</string>
     <string name="error_retreiving_page">Error: cannot find file`s data</string>
     <string name="page_error_helper">Looks like there was a problem with the file. Try refreshing the app or create a new file.</string>
     <string name="delete_confirmation_helper">This action will delete all the file`s data and cannot be undone.</string>

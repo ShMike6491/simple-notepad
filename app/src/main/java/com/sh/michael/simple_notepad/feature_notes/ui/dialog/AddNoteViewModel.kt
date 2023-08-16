@@ -2,20 +2,24 @@ package com.sh.michael.simple_notepad.feature_notes.ui.dialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sh.michael.simple_notepad.common.interfaces.INavigationCallback
+import com.sh.michael.simple_notepad.R
+import com.sh.michael.simple_notepad.common.model.SUCCESS_SNACKBAR
+import com.sh.michael.simple_notepad.common.model.UiEvent
+import com.sh.michael.simple_notepad.common.model.UiString
 import com.sh.michael.simple_notepad.feature_notes.domain.IStickyNoteRepository
 import com.sh.michael.simple_notepad.feature_notes.domain.model.BackgroundColor
 import com.sh.michael.simple_notepad.feature_notes.ui.model.AddNoteState
 import com.sh.michael.simple_notepad.feature_notes.ui.model.ColorOption
 import com.sh.michael.simple_notepad.feature_notes.ui.model.asColorRes
 import com.sh.michael.simple_notepad.feature_notes.ui.model.selectedColor
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class AddNoteViewModel(
-    private val repo: IStickyNoteRepository,
-    private val navigationCallback: INavigationCallback? // todo: migrate to UiEvent handling
+    private val repo: IStickyNoteRepository
 ) : ViewModel() {
 
     private val initialState = AddNoteState(
@@ -24,6 +28,9 @@ class AddNoteViewModel(
         onSubmitAction = this::submitNote,
         onCloseAction = this::exitDialog
     )
+
+    private val eventChannel = Channel<UiEvent>()
+    val uiEvent = eventChannel.receiveAsFlow()
 
     private val pageStateFlow = MutableStateFlow(initialState)
     val pageState: StateFlow<AddNoteState> = pageStateFlow
@@ -73,17 +80,27 @@ class AddNoteViewModel(
             noteText = note.titleValue,
             color = selectedColor
         ).runCatching {
+            showSuccess()
             exitDialog()
         }
     }
 
-    private fun exitDialog() {
-        navigationCallback?.onNavigate(DIALOG_DISMISS_ACTION)
+    private fun exitDialog() = viewModelScope.launch {
+        eventChannel.send(UiEvent.PopBackStack)
+    }
+
+    private fun showSuccess() = viewModelScope.launch {
+        val snackbar = SUCCESS_SNACKBAR.copy(
+            title = UiString.StringResource(R.string.new_note_was_created)
+        )
+
+        eventChannel.send(
+            UiEvent.ShowSnackbar(snackbar)
+        )
     }
 
     companion object {
-        const val MAX_NOTE_LENGTH = 50
 
-        const val DIALOG_DISMISS_ACTION = "notes_dialog_dismiss_action"
+        const val MAX_NOTE_LENGTH = 50
     }
 }
