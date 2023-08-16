@@ -68,14 +68,15 @@ class StickyNotesViewModelTest {
     @Test
     fun `test notesPositionChanged updates repository`() {
         // Given
-        val fromPosition = 0
-        val toPosition = 1
+        val stickyNote1 = mockk<StickyNoteState>(relaxed = true)
+        val stickyNote2 = mockk<StickyNoteState>(relaxed = true)
+        val stickyNotes = listOf(stickyNote1, stickyNote2)
 
         // When
-        viewModel.notesPositionChanged(fromPosition, toPosition)
+        viewModel.notifyItemsPositionChanged(stickyNotes)
 
         // Then
-        coVerify { mockRepo.updateItemsPosition(fromPosition, toPosition) }
+        coVerify { mockRepo.updateItems(stickyNotes) }
     }
 
     @Test
