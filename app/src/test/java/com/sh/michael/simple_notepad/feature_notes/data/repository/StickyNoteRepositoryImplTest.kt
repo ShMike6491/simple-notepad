@@ -132,4 +132,36 @@ class StickyNoteRepositoryImplTest {
             })
         }
     }
+
+    @Test
+    fun `insert updated notes list changes priority`() = runBlockingTest {
+        val mockNote1 = RoomStickyNote(
+            id = "test1",
+            priority = 2,
+            backgroundColor = BackgroundColor.BLUE,
+            noteText = "note1"
+        )
+
+        val mockNote2 = RoomStickyNote(
+            id = "test2",
+            priority = 9,
+            backgroundColor = BackgroundColor.BLUE,
+            noteText = "note2"
+        )
+
+        coEvery { mockDao.update(any<List<RoomStickyNote>>()) } returns Unit
+
+        repository.updateItems(listOf(mockNote1, mockNote2))
+
+        coVerify {
+            mockDao.update(
+                match<List<RoomStickyNote>> { notes ->
+                    notes[0].priority == 2
+                        && notes[1].priority == 1
+                        && notes[0].id == "test1"
+                        && notes[1].id == "test2"
+                }
+            )
+        }
+    }
 }

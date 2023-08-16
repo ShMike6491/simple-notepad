@@ -3,44 +3,59 @@ package com.sh.michael.simple_notepad.feature_notes.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sh.michael.simple_notepad.R
-import com.sh.michael.simple_notepad.common.IdentifiableDiffCallback
 import com.sh.michael.simple_notepad.feature_notes.ui.model.StickyNoteState
+import java.util.Collections
 
-class NotesAdapter : ListAdapter<StickyNoteState, StickyNoteViewHolder>(IdentifiableDiffCallback()) {
+class NotesAdapter : RecyclerView.Adapter<StickyNoteViewHolder>() {
+
+    private val items: MutableList<StickyNoteState> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = StickyNoteViewHolder (
         LayoutInflater.from(parent.context).inflate(R.layout.item_sticky_note, parent, false)
     )
 
     override fun onBindViewHolder(holder: StickyNoteViewHolder, position: Int) {
-        holder.bindItem(getItem(position))
+        holder.bindItem(items[position])
     }
 
-    inner class ItemTouchHelperCallback (
-        private val onItemMove: (fromPosition: Int, toPosition: Int) -> Unit
-    ) : ItemTouchHelper.Callback() {
+    override fun getItemCount() = items.size
 
-        override fun isLongPressDragEnabled() = true
+    fun submitList(list: List<StickyNoteState>) {
+        items.clear()
+        items.addAll(list)
+        notifyDataSetChanged()
+    }
 
-        override fun isItemViewSwipeEnabled() = true
+    inner class DragAndDropCallback(
+        private val doOnMove: ((list: List<StickyNoteState>) -> Unit)? = null
+    ) : ItemTouchHelper.SimpleCallback(
+        ItemTouchHelper.START.or(ItemTouchHelper.END),
+        ItemTouchHelper.UP or ItemTouchHelper.DOWN
+    ) {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            val startPosition = viewHolder.adapterPosition
+            val endPosition = target.adapterPosition
 
-        override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-            val dragFlags = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-            val swipeFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
-            return makeMovementFlags(dragFlags, swipeFlags)
+            Collections.swap(items, startPosition, endPosition)
+            notifyItemMoved(startPosition, endPosition)
+
+            return true
         }
 
-        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-            onItemMove(viewHolder.adapterPosition, target.adapterPosition)
-            return true
+        override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+            super.clearView(recyclerView, viewHolder)
+            doOnMove?.invoke(items)
         }
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             // todo refactor to swipe to reveal
-            val item = currentList[viewHolder.adapterPosition]
+            val item = items[viewHolder.adapterPosition]
             item.onPrimaryAction?.invoke()
         }
     }
