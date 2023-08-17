@@ -2,7 +2,6 @@ package com.sh.michael.simple_notepad
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.sh.michael.simple_notepad.common.DrawerHandle
 import com.sh.michael.simple_notepad.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,11 +13,5 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        DrawerHandle.attach(binding.drawerNavigationView, R.layout.menu_handle, HANDLE_OFFSET)
-    }
-
-    companion object {
-        const val HANDLE_OFFSET = 0.7f
     }
 }
