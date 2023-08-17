@@ -32,6 +32,8 @@
         android:background="@null"
         android:gravity="start"
         android:id="@+id/mainEditText"
+        android:textColor="@color/black"
+        android:textColorHint="@color/granite_gray"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/default_gap_medium"
         android:layout_marginHorizontal="@dimen/default_gap_medium"
