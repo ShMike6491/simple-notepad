@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // todo: disable swipe gesture for this view
         DrawerHandle.attach(
             binding.drawerNavigationView,
             R.layout.menu_handle,
