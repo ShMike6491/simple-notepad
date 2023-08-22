@@ -119,6 +119,7 @@ class DrawerHandle private constructor(
     }
 
     companion object {
+
         @JvmOverloads
         fun attach(drawer: View, handleLayout: Int, verticalOffset: Float = 0f): DrawerHandle {
             require(drawer.parent is DrawerLayout) { "Argument drawer must be direct child of a DrawerLayout" }
