@@ -13,9 +13,4 @@
         android:pathData="M100,0L100,83L100,100"
         android:strokeWidth="0.3"
         android:strokeColor="@color/chinese_white"/>
-
-    <path
-        android:pathData="M100,82.5L100,69.5L100,70"
-        android:strokeWidth="1"
-        android:strokeColor="@color/granite_gray"/>
 </vector>
