@@ -12,6 +12,8 @@ import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.hardware.display.DisplayManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.customview.widget.ViewDragHelper
@@ -126,4 +128,47 @@ class DrawerHandle private constructor(
             return DrawerHandle(drawer.parent as DrawerLayout, drawer, handleLayout, verticalOffset)
         }
     }
+}
+
+fun ViewGroup.attachDrawerBorder(borderView: Int, offset: Float, gravity: Int) {
+    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    val view: View = inflater.inflate(borderView, this, false)
+    val display: Display? = DisplayManagerCompat.getInstance(context).getDisplay(Display.DEFAULT_DISPLAY)
+    val screenDimensions = Point()
+
+    view.layoutParams = if (this is ConstraintLayout) {
+        ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT
+        ).also {
+            if (gravity == Gravity.END || gravity == Gravity.RIGHT) {
+                it.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+            }
+
+            if (gravity == Gravity.START || gravity == Gravity.LEFT) {
+                it.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+            }
+        }
+    } else {
+        FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        ).also {
+            if (gravity == Gravity.END || gravity == Gravity.RIGHT) {
+                it.gravity = Gravity.END
+            }
+
+            if (gravity == Gravity.START || gravity == Gravity.LEFT) {
+                it.gravity = Gravity.START
+            }
+        }
+    }
+
+    screenDimensions.x = display?.width ?: 0
+    screenDimensions.y = display?.height ?: 0
+
+    val myOffset = 0.675f
+    view.y = myOffset * screenDimensions.y
+
+    addView(view)
 }
