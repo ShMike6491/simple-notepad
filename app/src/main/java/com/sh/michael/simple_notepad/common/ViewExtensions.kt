@@ -1,5 +1,7 @@
 package com.sh.michael.simple_notepad.common
 
+import android.graphics.Rect
+import android.os.Build
 import android.os.SystemClock
 import android.text.Editable
 import android.text.InputFilter
@@ -7,6 +9,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.doOnLayout
 import com.google.android.material.appbar.AppBarLayout
 
 fun View?.showIf(condition: Boolean): Boolean {
@@ -98,5 +101,21 @@ fun AppBarLayout.disableScroll() {
 
     params?.behavior = AppBarLayout.Behavior().also {
         it.setDragCallback(callback)
+    }
+}
+
+/**
+ * this function allows us to disable Android 10 navigation gestures
+ * for a specific view.
+ */
+fun View.disableGlobalGestures() {
+    this.apply {
+        doOnLayout {
+            val rects = mutableListOf<Rect>()
+            rects.add(Rect(0,0,width,150.toPx()))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                systemGestureExclusionRects = rects
+            }
+        }
     }
 }
