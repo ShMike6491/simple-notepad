@@ -9,17 +9,26 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 fun <T> Fragment.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
+    val isCollecting = MutableSharedFlow<Boolean>(replay = 1)
+
     lifecycleScope.launch {
-        repeatOnLifecycle(Lifecycle.State.STARTED) {
-            flow.collectLatest(collect)
-        }
+        flow.onStart { isCollecting.emit(true) }
+            .collectLatest { value ->
+                // Don't collect if another collection is already ongoing
+                if (isCollecting.firstOrNull() == true) {
+                    collect(value)
+                }
+            }
     }
 }
 
