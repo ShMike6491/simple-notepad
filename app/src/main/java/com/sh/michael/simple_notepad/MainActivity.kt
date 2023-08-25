@@ -3,6 +3,7 @@ package com.sh.michael.simple_notepad
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.sh.michael.simple_notepad.common.DrawerHandle
 import com.sh.michael.simple_notepad.common.disableGlobalGestures
 import com.sh.michael.simple_notepad.databinding.ActivityMainBinding
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
