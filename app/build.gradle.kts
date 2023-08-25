@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.android.appcompat)
     implementation(libs.android.constraint)
     implementation(libs.android.lifecycle)
+    implementation(libs.android.splash)
     implementation(libs.material)
     implementation(libs.navigation.ui)
     implementation(libs.navigation.fragment)

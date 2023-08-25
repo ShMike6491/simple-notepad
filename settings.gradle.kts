@@ -32,6 +32,7 @@ dependencyResolutionManagement {
             val mockkRef = version("mockk", "1.12.2")
             val testCoreRef = version("test-core", "1.4.0")
             val testFragmentRef = version("test-fragment", "1.5.5")
+            val splashScreenRef = version("splash", "1.0.0")
 
             alias("navigation-fragment").to("androidx.navigation", "navigation-fragment-ktx").versionRef(navigationRef)
             alias("navigation-ui").to("androidx.navigation", "navigation-ui-ktx").versionRef(navigationRef)
@@ -40,6 +41,7 @@ dependencyResolutionManagement {
             alias("android-constraint").to("androidx.constraintlayout", "constraintlayout").versionRef(androidConstraintRef)
             alias("android-lifecycle").to("androidx.lifecycle", "lifecycle-livedata-ktx").versionRef(androidLifecycleRef)
             alias("android-core").to("androidx.core", "core-ktx").versionRef(androidCoreRef)
+            alias("android-splash").to("androidx.core", "core-splashscreen").versionRef(splashScreenRef)
             alias("kotlin-coroutines").to("org.jetbrains.kotlinx", "kotlinx-coroutines-android").versionRef(coroutinesRef)
             alias("koin-core").to("io.insert-koin", "koin-core").versionRef(koinRef)
             alias("koin-android").to("io.insert-koin", "koin-android").versionRef(koinRef)
