@@ -12,7 +12,6 @@
         android:background="@color/granite_gray"
         android:id="@+id/verticalPageDividerView"
         android:layout_height="match_parent"
-        android:layout_marginVertical="60dp"
         android:layout_width="0.5dp" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
