@@ -57,7 +57,7 @@ class PagesRepositoryImpl(
     override suspend fun deleteAllFilesData(fileId: String) {
         filesDao.deleteById(fileId)
         // needs to delay due to quick rendering
-        delay(200)
+        delay(400)
         pagesDao.deleteByFileId(fileId)
     }
 }
