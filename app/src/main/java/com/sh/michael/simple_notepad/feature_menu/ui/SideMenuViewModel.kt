@@ -34,6 +34,6 @@ class SideMenuViewModel : ViewModel() {
     companion object {
 
         const val NAVIGATE_TO_CONTACTS_ACTION = "action_menu_navigate_to_contacts"
-        const val CONTACT_EMAIL_ADDRESS = "email address"
+        const val CONTACT_EMAIL_ADDRESS = "inkit.notesapp@gmail.com"
     }
 }
