@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.GravityCompat
 import com.sh.michael.simple_notepad.common.DrawerHandle
 import com.sh.michael.simple_notepad.common.disableGlobalGestures
 import com.sh.michael.simple_notepad.databinding.ActivityMainBinding
@@ -26,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         )
 
         findViewById<ImageView>(R.id.handleImageView).disableGlobalGestures()
+    }
+
+    fun closeDrawer() {
+        binding.mainContainer.closeDrawer(GravityCompat.START)
     }
 
     companion object {
