@@ -32,7 +32,7 @@ class NotesAdapter : RecyclerView.Adapter<StickyNoteViewHolder>() {
         private val doOnMove: ((list: List<StickyNoteState>) -> Unit)? = null
     ) : ItemTouchHelper.SimpleCallback(
         ItemTouchHelper.START.or(ItemTouchHelper.END),
-        ItemTouchHelper.UP or ItemTouchHelper.DOWN
+        ItemTouchHelper.UP
     ) {
         override fun onMove(
             recyclerView: RecyclerView,
