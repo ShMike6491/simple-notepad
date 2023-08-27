@@ -32,12 +32,11 @@ class SideMenuViewModelTest {
 
     @Test
     fun `test email state initialized correctly`() {
-        val state = viewModel.emailState
+        val state = viewModel.menuState
 
-        assertEquals(true, state.onItemClickAction != null)
-        assertEquals(true, state.menuTitle != null)
-        assertEquals(true, state.hasIcon)
-        assertEquals("menuItem", state.id)
+        assertEquals(2, state.size)
+        assertEquals("menuItem", state.first().id)
+        assertEquals("privacyItem", state[1].id)
     }
 
     @Test
@@ -50,11 +49,24 @@ class SideMenuViewModelTest {
 
     @Test
     fun `test email click event flow`(): Unit = runBlocking {
-        viewModel.emailState
+        viewModel.menuState
+            .first()
             .onItemClickAction
             ?.invoke()
 
         val expected = UiEvent.Navigate("action_menu_navigate_to_contacts")
+        val actual = viewModel.uiEvent.first()
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `test privacy click event flow`(): Unit = runBlocking {
+        viewModel.menuState
+            .get(1)
+            .onItemClickAction
+            ?.invoke()
+
+        val expected = UiEvent.Web("https://doc-hosting.flycricket.io/inkit-privacy-policy/7f213bbd-a7dd-448a-b99b-1f9060c15560/privacy")
         val actual = viewModel.uiEvent.first()
         assertEquals(expected, actual)
     }

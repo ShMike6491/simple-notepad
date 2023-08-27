@@ -7,6 +7,7 @@
     <string name="undo_caps">UNDO</string>
     <string name="note_hint_text">Type note…</string>
     <string name="page_hint_text">Write here…</string>
+    <string name="privacy_policy">Privacy Policy</string>
     <string name="enter_file_name">Enter file name…</string>
     <string name="error">Error occurred</string>
     <string name="something_went_wrong">Oops! Something went wrong…</string>

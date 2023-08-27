@@ -15,11 +15,19 @@ class SideMenuViewModel : ViewModel() {
     private val eventChannel = Channel<UiEvent>()
     val uiEvent = eventChannel.receiveAsFlow()
 
-    val emailState = MenuItemState(
-        "menuItem",
-        StringResource(R.string.contact_me),
-        R.drawable.ic_at,
-        onItemClickAction = this::openEmail
+    val menuState = listOf(
+        MenuItemState(
+            "menuItem",
+            StringResource(R.string.contact_me),
+            R.drawable.ic_at,
+            onItemClickAction = this::openEmail
+        ),
+        MenuItemState(
+            "privacyItem",
+            StringResource(R.string.privacy_policy),
+            R.drawable.ic_privacy,
+            onItemClickAction = this::openPrivacyWeb
+        )
     )
 
     fun onExitClick() {
@@ -33,9 +41,15 @@ class SideMenuViewModel : ViewModel() {
         eventChannel.send(event)
     }
 
+    private fun openPrivacyWeb() = viewModelScope.launch {
+        val event = UiEvent.Web(PRIVACY_POLICY_LINK)
+        eventChannel.send(event)
+    }
+
     companion object {
 
         const val NAVIGATE_TO_CONTACTS_ACTION = "action_menu_navigate_to_contacts"
         const val CONTACT_EMAIL_ADDRESS = "inkit.notesapp@gmail.com"
+        const val PRIVACY_POLICY_LINK = "https://doc-hosting.flycricket.io/inkit-privacy-policy/7f213bbd-a7dd-448a-b99b-1f9060c15560/privacy"
     }
 }

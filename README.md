@@ -88,3 +88,7 @@ and pushed it to remote. Tag appropriate people to review your merge request.
 ## Libraries 
 
 TODO
+
+## Privacy Policy
+
+https://doc-hosting.flycricket.io/inkit-privacy-policy/7f213bbd-a7dd-448a-b99b-1f9060c15560/privacy

@@ -28,16 +28,15 @@
 
     </androidx.cardview.widget.CardView>
 
-
-    <include
-        layout="@layout/item_side_menu"
-        android:id="@+id/emailItem"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/menuItemsContainer"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/default_gap_medium"
-        android:layout_marginTop="@dimen/default_gap_large"
+        android:layout_marginTop="32dp"
         android:layout_width="match_parent"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/exitContainer"
-        tools:visibility="visible" />
+        tools:itemLayout="@layout/item_side_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
