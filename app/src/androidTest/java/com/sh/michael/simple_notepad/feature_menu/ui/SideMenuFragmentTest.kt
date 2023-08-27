@@ -7,6 +7,7 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -72,7 +73,7 @@ class SideMenuFragmentTest {
             R.drawable.ic_plus
         )
 
-        every { mockViewModel.emailState } returns mockState
+        every { mockViewModel.menuState } returns listOf(mockState)
 
         launchFragmentInContainer<SideMenuFragment>()
 
@@ -90,7 +91,7 @@ class SideMenuFragmentTest {
     @Test
     fun testExitIsShown() {
         val mockState = MenuItemState("")
-        every { mockViewModel.emailState } returns mockState
+        every { mockViewModel.menuState } returns listOf(mockState)
 
         launchFragmentInContainer<SideMenuFragment>()
 
@@ -101,7 +102,7 @@ class SideMenuFragmentTest {
     @Test
     fun testExitClickTriggersViewModelExit() {
         val mockState = MenuItemState("")
-        every { mockViewModel.emailState } returns mockState
+        every { mockViewModel.menuState } returns listOf(mockState)
         every { mockViewModel.onExitClick() } returns Unit
 
         launchFragmentInContainer<SideMenuFragment>()
@@ -116,7 +117,7 @@ class SideMenuFragmentTest {
     fun testContactMenuClickTriggersStateMethod() {
         var hasBeenCalled = false
         val mockState = MenuItemState("") { hasBeenCalled = true }
-        every { mockViewModel.emailState } returns mockState
+        every { mockViewModel.menuState } returns listOf(mockState)
 
         launchFragmentInContainer<SideMenuFragment>()
 
@@ -130,7 +131,7 @@ class SideMenuFragmentTest {
     fun testNavigationToMailWorksAsExpected(): Unit = runBlocking {
         val testChannel = Channel<UiEvent>()
         val mockState = MenuItemState("")
-        every { mockViewModel.emailState } returns mockState
+        every { mockViewModel.menuState } returns listOf(mockState)
         every { mockViewModel.uiEvent } returns testChannel.receiveAsFlow()
 
         launchFragmentInContainer<SideMenuFragment>()
@@ -138,6 +139,22 @@ class SideMenuFragmentTest {
         testChannel.send(UiEvent.Navigate("action_menu_navigate_to_contacts"))
 
         val expectedIntent = allOf(hasAction(Intent.ACTION_SENDTO))
+        intended(expectedIntent)
+    }
+
+    @Test
+    fun testNavigationToPrivacyWebWorksAsExpected(): Unit = runBlocking {
+        val testUrl = "https://www.google.com"
+        val testChannel = Channel<UiEvent>()
+        val mockState = MenuItemState("")
+        every { mockViewModel.menuState } returns listOf(mockState)
+        every { mockViewModel.uiEvent } returns testChannel.receiveAsFlow()
+
+        launchFragmentInContainer<SideMenuFragment>()
+
+        testChannel.send(UiEvent.Web(testUrl))
+
+        val expectedIntent = allOf(hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(testUrl))
         intended(expectedIntent)
     }
 }
