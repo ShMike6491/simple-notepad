@@ -22,8 +22,10 @@ class SideMenuViewModel : ViewModel() {
         onItemClickAction = this::openEmail
     )
 
-    fun onExitClick() = viewModelScope.launch {
-        eventChannel.send(UiEvent.PopBackStack)
+    fun onExitClick() {
+        viewModelScope.launch {
+            eventChannel.send(UiEvent.PopBackStack)
+        }
     }
 
     private fun openEmail() = viewModelScope.launch {
