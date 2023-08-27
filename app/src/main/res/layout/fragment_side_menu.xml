@@ -2,18 +2,42 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background_side_menu"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/exitContainer"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_gap_medium"
         android:layout_width="wrap_content"
-        android:text="this is side menu screen"
-        android:textColor="@color/chinese_white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardBackgroundColor="@color/banana_yellow"
+        app:cardCornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:contentDescription="@string/exit"
+            android:id="@+id/exitImageView"
+            android:layout_height="16dp"
+            android:layout_margin="4dp"
+            android:layout_width="16dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/black" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <include
+        layout="@layout/item_side_menu"
+        android:id="@+id/emailItem"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_gap_medium"
+        android:layout_marginTop="@dimen/default_gap_large"
+        android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/exitContainer"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_menu_item"
+    android:layout_width="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/iconContainer"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        app:cardBackgroundColor="@color/banana_yellow"
+        app:cardCornerRadius="@dimen/default_gap_small">
+
+        <ImageView
+            android:contentDescription="@null"
+            android:id="@+id/iconImageView"
+            android:layout_height="24dp"
+            android:layout_margin="4dp"
+            android:layout_width="24dp"
+            app:tint="@color/black"
+            tools:src="@drawable/ic_delete" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleTextView"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="Contact Me" />
+
+    <ImageView
+        android:contentDescription="@string/navigate"
+        android:foregroundGravity="right"
+        android:id="@+id/trailingImageView"
+        android:layout_gravity="end|center_vertical"
+        android:layout_height="24dp"
+        android:layout_margin="8dp"
+        android:layout_width="24dp"
+        android:src="@drawable/ic_right_arrow"
+        app:tint="@color/black" />
+
+</FrameLayout>
