@@ -50,6 +50,6 @@ class SideMenuViewModel : ViewModel() {
 
         const val NAVIGATE_TO_CONTACTS_ACTION = "action_menu_navigate_to_contacts"
         const val CONTACT_EMAIL_ADDRESS = "inkit.notesapp@gmail.com"
-        const val PRIVACY_POLICY_LINK = "https://www.google.com/"
+        const val PRIVACY_POLICY_LINK = "https://doc-hosting.flycricket.io/inkit-privacy-policy/7f213bbd-a7dd-448a-b99b-1f9060c15560/privacy"
     }
 }
