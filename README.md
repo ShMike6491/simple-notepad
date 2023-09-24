@@ -10,7 +10,7 @@ The app is currently in development. I want to finish some of the main functiona
 
 ### Screenshots
 
-TODO
+<img width="100%" align="center" src="https://github.com/ShMike6491/simple-notepad/blob/develop/assets/preview.jpeg?raw=true"> 
 
 ## Project Stracture
 
