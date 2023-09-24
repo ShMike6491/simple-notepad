@@ -1,23 +1,16 @@
 ## About The Project
 
+**InkIt** is a fully functional note taking Android app built entirely with Kotlin. This project serves not only as a valuable personal organizer but also as a demonstration of my journey and expertise in Android app development.
+
+The app is currently in development. I want to finish some of the main functionality to have a solid base to work from. Later in the development I want to make full migration to compose and kotlin multiplatform. 
+
+### Features
+
+**InkIt** allows you to have a quick access to your personal notes. It has sticky notes functionality for quick task tracking and a file system that allows user to categorize the content.
+
+### Screenshots
+
 TODO
-
-## Architecture Guidelines 
-I am trying to follow common clean code principles for android architecture: https://developer.android.com/topic/architecture
-
-TODO: ADD DDD EXPLANAITION, ADD TDD EXPLANAITION, CLEAN ARCHITECTURE, USEFUL LINKS.
-
-example projects
-
-sotial network app (ddd feature layers example): https://github.com/philipplackner/SocialNetworkTwitch/tree/development/app/src/main/java/com/plcoding/socialnetworktwitch
-
-clean architecture app: https://github.com/philipplackner/CleanArchitectureNoteApp/tree/app 
-
-ddd real life example app: https://gitlab.com/flexsentlabs/tip_prorotype/-/tree/master/app/src/main/java/com/flexsentlabs/tip 
-
-stock market example app: https://github.com/philipplackner/StockMarketApp/tree/final
-
-spotify clone example app: https://github.com/philipplackner/SpotifyCloneYT/tree/Part19-SongFragment2
 
 ## Project Stracture
 
@@ -37,9 +30,11 @@ The libraries I use in this project include:
  * androidx.test.espresso: used for UI testing of the app by simulating user interactions such as clicks and scrolls.
  * androidx.room: persistence library provides an abstraction layer over SQLite.
  * kotlinx-coroutines-android: concurrency design pattern that you can use on Android to simplify code that executes asynchronously.
- * io.insert-koin::dependency injection framework.
+ * io.insert-koin: dependency injection framework.
 
 ### Architecture
+
+I am trying to follow common clean code principles for android architecture: https://developer.android.com/topic/architecture
 
 Clean Architecture is a software design philosophy that aims to create software that is easy to maintain and extend over time. It is based on the SOLID principles of object-oriented programming, which emphasize the importance of single responsibility, open-closed principle, Liskov substitution principle, interface segregation, and dependency inversion. In Clean Architecture, the application is separated into distinct layers that represent different levels of abstraction and responsibility, which helps to ensure that each layer can be modified independently without affecting the others.
 
@@ -52,6 +47,7 @@ MVVM (Model-View-ViewModel) is a design pattern that is commonly used in modern 
 Based on these concepts, the application is structured using Clean Architecture principles, with separate layers for the domain, dependency injection (DI), data, and UI. Each feature is further divided into these layers to promote separation of concerns and modularity. The use of DDD emphasizes the importance of modeling the problem domain, while TDD helps to ensure that the code is correct and maintainable. Finally, the use of MVVM separates the UI from the application logic and data, which makes the code more modular and easier to maintain.
 
 ## Git Guildelines 
+
 Here I am trying to implement all the common principles of Git Flow: https://nvie.com/posts/a-successful-git-branching-model/
 
 As for now "Main" branch is empty and there are no "Release Branches", because I haven't posted anything on the Google Play platform yet. And the current "Develop" version of this app doesn't sutisfy all the user's needs yet. Therefore "Develop" branch acts as a working code source as for this moment, where all the latest updates are mearged into.
@@ -84,10 +80,6 @@ TICKET-123 - handle order loading
 
 After you have created your feature/JIRA-123_add_avatar_loading branch from the current develop branch 
 and pushed it to remote. Tag appropriate people to review your merge request.
-
-## Libraries 
-
-TODO
 
 ## Privacy Policy
 
