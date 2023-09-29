@@ -17,7 +17,8 @@ class HomeViewModel : ViewModel() {
         id = UUID.randomUUID().toString(),
         onPrimaryAction = this::onPrimaryClick,
         onNoteAction = this::onNoteClick,
-        onFileAction = this::onFileClick
+        onFileAction = this::onFileClick,
+        onAppbarCollapseAction = this::switchActionsVisibility
     )
 
     private val eventChannel = Channel<UiEvent>()
@@ -47,6 +48,12 @@ class HomeViewModel : ViewModel() {
     private fun switchExtendedState() = viewModelScope.launch {
         state.value = stateData.value.copy(
             isExtendedState = !stateData.value.isExtendedState
+        )
+    }
+
+    private fun switchActionsVisibility(isCollapsed: Boolean) = viewModelScope.launch {
+        state.value = stateData.value.copy(
+            showActions = isCollapsed.not()
         )
     }
 
