@@ -44,20 +44,12 @@ abstract class AppDatabase : RoomDatabase() {
                     // todo: convert to migration strategies when app is in production
                     //  https://developer.android.com/training/data-storage/room/migrating-db-versions.html
                     .fallbackToDestructiveMigration()
+                    .addCallback(PrepopulateCallback(context))
                     .build()
-                    .initDefaultValues()
 
                 INSTANCE = instance
                 instance
             }
         }
-    }
-}
-
-fun AppDatabase.initDefaultValues(): AppDatabase {
-    // todo: initialize database with default files and pages data
-    //  possibly use other approach
-    return this.apply {
-
     }
 }
