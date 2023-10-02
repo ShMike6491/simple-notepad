@@ -2,8 +2,10 @@ package com.sh.michael.simple_notepad.feature_home.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.sh.michael.simple_notepad.R
+import com.sh.michael.simple_notepad.common.addCollapseStateListener
 import com.sh.michael.simple_notepad.common.applyOnce
 import com.sh.michael.simple_notepad.common.catchLifecycleFlow
 import com.sh.michael.simple_notepad.common.collectLatestLifecycleFlow
@@ -49,14 +51,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun renderPage(state: HomeState) = binding.apply {
+        appbar.applyOnce {
+            addCollapseStateListener { isCollapsed ->
+                state.onAppbarCollapseAction?.invoke(isCollapsed)
+            }
+        }
+
         dimmedBackgroundView.showIf(state.isExtendedState)
 
-        if (state.isExtendedState.not()) {
-            newNoteFab.showOutAnimation()
-            newFileFab.showOutAnimation()
-        } else {
-            newNoteFab.showInAnimation()
-            newFileFab.showInAnimation()
+        state.run {
+            renderFloatingButtons(showActions, isExtendedState)
         }
 
         state.onPrimaryAction?.let { action ->
@@ -81,6 +85,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         state.onNoteAction?.let { action ->
             newNoteFab.applyOnce { setOnClickListener { action() } }
+        }
+    }
+
+    private fun renderFloatingButtons(areShown: Boolean, areExpended: Boolean) = binding.apply {
+        val visibility = if (areShown) View.VISIBLE else View.INVISIBLE
+        val isStateTheSame = addNewFab.isVisible == areShown
+
+        addNewFab.showIf(areShown)
+
+        newNoteFab.visibility = visibility
+        newFileFab.visibility = visibility
+
+        if (isStateTheSame.not()) return@apply
+
+        if (areExpended) {
+            newNoteFab.showInAnimation()
+            newFileFab.showInAnimation()
+        } else {
+            newNoteFab.showOutAnimation()
+            newFileFab.showOutAnimation()
         }
     }
 
