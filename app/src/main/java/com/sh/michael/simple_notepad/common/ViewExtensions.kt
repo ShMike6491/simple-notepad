@@ -119,3 +119,13 @@ fun View.disableGlobalGestures() {
         }
     }
 }
+
+fun AppBarLayout.addCollapseStateListener(callback: (isCollapsed: Boolean) -> Unit) {
+    val listener = object : AppBarStateChangeListener() {
+        override fun onStateChanged(appBarLayout: AppBarLayout?, state: State) {
+            callback.invoke(state == State.COLLAPSED)
+        }
+    }
+
+    addOnOffsetChangedListener(listener)
+}
