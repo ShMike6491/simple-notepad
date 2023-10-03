@@ -35,18 +35,22 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatEditText
+        android:autoLink="web|email"
         android:background="@null"
         android:gravity="start"
         android:id="@+id/mainEditText"
+        android:inputType="textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/default_gap_medium"
         android:layout_marginHorizontal="@dimen/default_gap_medium"
         android:layout_marginTop="@dimen/default_gap_extra_large"
         android:layout_width="match_parent"
+        android:linksClickable="true"
         android:singleLine="false"
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textColorHint="@color/granite_gray"
+        android:textColorLink="@color/blue_link"
         tools:text="@tools:sample/lorem/random" />
 
     <ProgressBar
