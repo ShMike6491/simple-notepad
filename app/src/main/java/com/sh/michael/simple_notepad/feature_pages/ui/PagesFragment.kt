@@ -9,9 +9,11 @@ import com.sh.michael.simple_notepad.common.applyOnce
 import com.sh.michael.simple_notepad.common.catchLifecycleFlow
 import com.sh.michael.simple_notepad.common.clickWithDebounce
 import com.sh.michael.simple_notepad.common.collectLatestLifecycleFlow
+import com.sh.michael.simple_notepad.common.doNothing
 import com.sh.michael.simple_notepad.common.model.UiError
-import com.sh.michael.simple_notepad.common.model.UiEvent.*
+import com.sh.michael.simple_notepad.common.model.UiEvent.ShowSnackbar
 import com.sh.michael.simple_notepad.common.model.hasValue
+import com.sh.michael.simple_notepad.common.onBackPressed
 import com.sh.michael.simple_notepad.common.showAndApplyIf
 import com.sh.michael.simple_notepad.common.showIf
 import com.sh.michael.simple_notepad.common.showSnackBar
@@ -30,6 +32,12 @@ class PagesFragment : Fragment(R.layout.fragment_pages) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        onBackPressed {
+            binding.mainEditText.apply {
+                if (hasFocus()) clearFocus() else activity?.finish()
+            }
+        }
+
         collectLatestLifecycleFlow(viewModel.stateData) {
             binding.mainEditText.showIf(it.hasError.not())
             binding.errorContainer.root.showIf(it.hasError)
@@ -39,7 +47,10 @@ class PagesFragment : Fragment(R.layout.fragment_pages) {
         }
 
         catchLifecycleFlow(viewModel.uiEvent) { event ->
-            if (event is ShowSnackbar) showSnackBar(event.state)
+            when (event) {
+                is ShowSnackbar -> showSnackBar(event.state)
+                else -> doNothing()
+            }
         }
     }
 

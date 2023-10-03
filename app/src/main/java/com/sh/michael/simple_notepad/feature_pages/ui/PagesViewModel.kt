@@ -57,7 +57,6 @@ class PagesViewModel(
         }
 
         if (currentPageId.get() != page.id) currentPageId.set(page.id)
-//        if (stateData.value.valueText == page.pageText) return stateData.value
 
         return initialValue.copy(
             valueText = page.pageText ?: "",

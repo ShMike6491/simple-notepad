@@ -3,6 +3,7 @@ package com.sh.michael.simple_notepad.common
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.graphics.Rect
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -65,6 +66,13 @@ fun Fragment.addKeyboardStateListener(binding: ViewBinding, callback: (height: I
 fun Fragment.hideKeyboard() {
     val imm = context?.getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
     imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+}
+
+fun Fragment.onBackPressed(callback: () -> Unit) {
+    activity?.onBackPressedDispatcher
+        ?.addCallback(viewLifecycleOwner) {
+            callback.invoke()
+        }
 }
 
 fun Fragment.showKeyboard() {
